@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-body text-brand-charcoal bg-brand-ivory antialiased;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-4 py-14 sm:px-6 sm:py-20 lg:px-8;
+  }
+  .section-title {
+    @apply font-display text-3xl font-bold tracking-tight text-brand-charcoal sm:text-4xl;
+  }
+  .section-subtitle {
+    @apply mt-2 max-w-xl text-sm leading-relaxed text-brand-charcoal-light sm:text-base;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-btn bg-brand-maroon px-7 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-maroon-dark hover:shadow-md active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-btn border-2 border-brand-maroon/20 bg-white/80 px-7 py-3 text-sm font-semibold text-brand-maroon backdrop-blur-sm transition hover:border-brand-maroon hover:bg-brand-maroon-light active:scale-[0.98];
+  }
+  .glass-card {
+    @apply rounded-card border border-white/60 bg-white/70 shadow-card backdrop-blur-md;
+  }
+  .image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .fade-edge-r {
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}

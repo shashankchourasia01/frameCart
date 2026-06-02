@@ -1,0 +1,62 @@
+const express = require('express');
+const { supabase } = require('../lib/supabase');
+const mock = require('../data/mock');
+
+const router = express.Router();
+
+router.get('/', async (req, res, next) => {
+  try {
+    const { category, featured, bestseller, limit } = req.query;
+
+    if (supabase) {
+      let q = supabase.from('products').select('*, categories(name, slug)').eq('is_active', true);
+      if (featured === 'true') q = q.eq('is_featured', true);
+      if (bestseller === 'true') q = q.eq('is_bestseller', true);
+      if (category) {
+        const { data: cat } = await supabase.from('categories').select('id').eq('slug', category).single();
+        if (cat) q = q.eq('category_id', cat.id);
+      }
+      q = q.order('sort_order');
+      if (limit) q = q.limit(Number(limit));
+      const { data, error } = await q;
+      if (error) throw error;
+      return res.json(
+        data.map((p) => ({
+          ...p,
+          categories: p.categories ?? undefined,
+        }))
+      );
+    }
+
+    let list = [...mock.products];
+    if (category) list = list.filter((p) => p.categories?.slug === category);
+    if (featured === 'true') list = list.filter((p) => p.is_featured);
+    if (bestseller === 'true') list = list.filter((p) => p.is_bestseller);
+    if (limit) list = list.slice(0, Number(limit));
+    res.json(list);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.get('/:slug', async (req, res, next) => {
+  try {
+    if (supabase) {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*, categories(name, slug)')
+        .eq('slug', req.params.slug)
+        .eq('is_active', true)
+        .single();
+      if (error) throw error;
+      return res.json(data);
+    }
+    const product = mock.products.find((p) => p.slug === req.params.slug);
+    if (!product) return res.status(404).json({ message: 'Product not found' });
+    res.json(product);
+  } catch (e) {
+    next(e);
+  }
+});
+
+module.exports = router;
