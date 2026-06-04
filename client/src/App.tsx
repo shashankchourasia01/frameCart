@@ -19,6 +19,12 @@ const CategoryPage = lazy(() => import('./pages/CategoryPage').then((m) => ({ de
 const ProductDetailPage = lazy(() =>
   import('./pages/ProductDetailPage').then((m) => ({ default: m.ProductDetailPage }))
 );
+const ProductUploadPage = lazy(() =>
+  import('./pages/product/ProductUploadPage').then((m) => ({ default: m.ProductUploadPage }))
+);
+const ProductReviewPage = lazy(() =>
+  import('./pages/product/ProductReviewPage').then((m) => ({ default: m.ProductReviewPage }))
+);
 const PreviewPage = lazy(() => import('./pages/PreviewPage').then((m) => ({ default: m.PreviewPage })));
 const OffersPage = lazy(() => import('./pages/OffersPage').then((m) => ({ default: m.OffersPage })));
 const OrderConfirmPage = lazy(() =>
@@ -84,6 +90,8 @@ function AnimatedRoutes() {
             <Route path="/" element={<HomePage />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
             <Route path="/product/:slug" element={<ProductDetailPage />} />
+            <Route path="/product/:slug/upload" element={<ProductUploadPage />} />
+            <Route path="/product/:slug/review" element={<ProductReviewPage />} />
             <Route path="/preview" element={<PreviewPage />} />
             <Route path="/offers" element={<OffersPage />} />
             <Route path="/order-confirm" element={<OrderConfirmPage />} />
