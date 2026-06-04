@@ -17,7 +17,7 @@ export function CategoryPage() {
   const { data: category } = useCategory(slug);
   const { data: products, isLoading } = useProducts({ category: slug });
   const [sort, setSort] = useState<SortKey>('latest');
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(12);
 
   const banner = getCategoryBanner(slug, category?.banner_url);
 
@@ -48,6 +48,11 @@ export function CategoryPage() {
           {category?.description && (
             <p className="mt-2 max-w-md text-sm text-white/75">{category.description}</p>
           )}
+          {!isLoading && products && (
+            <p className="mt-2 text-xs font-medium uppercase tracking-wider text-white/60">
+              {products.length} frame{products.length !== 1 ? 's' : ''} available
+            </p>
+          )}
         </div>
       </div>
 
@@ -73,7 +78,7 @@ export function CategoryPage() {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         {isLoading ? (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {Array.from({ length: 4 }).map((_, i) => (
+            {Array.from({ length: 8 }).map((_, i) => (
               <ProductCardSkeleton key={i} />
             ))}
           </div>

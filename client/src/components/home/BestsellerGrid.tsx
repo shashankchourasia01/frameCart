@@ -6,7 +6,7 @@ import { ProductCardSkeleton } from '../product/ProductCardSkeleton';
 import { staggerContainer, fadeUp } from '../../animations/variants';
 import { HiArrowRight } from '../icons';
 
-const BESTSELLER_LIMIT = 16;
+const BESTSELLER_LIMIT = 42;
 
 export function BestsellerGrid() {
   const { data: products, isLoading } = useProducts({ bestseller: true, limit: BESTSELLER_LIMIT });
@@ -53,7 +53,7 @@ export function BestsellerGrid() {
           className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
         >
           {isLoading
-            ? Array.from({ length: 8 }).map((_, i) => (
+            ? Array.from({ length: 12 }).map((_, i) => (
                 <motion.div key={i} variants={fadeUp}>
                   <ProductCardSkeleton />
                 </motion.div>
