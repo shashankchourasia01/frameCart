@@ -14,6 +14,8 @@ const ordersRouter = require('./routes/orders');
 const uploadRouter = require('./routes/upload');
 const adminRouter = require('./routes/admin');
 const validateCouponRouter = require('./routes/validateCoupon');
+const { supabase } = require('./lib/supabase');
+const mock = require('./data/mock');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -41,7 +43,16 @@ app.use(morgan('dev'));
 app.use(express.json({ limit: '2mb' }));
 app.use(apiLimiter);
 
-app.get('/health', (_req, res) => res.json({ ok: true }));
+app.get('/health', (_req, res) =>
+  res.json({
+    ok: true,
+    dataSource: supabase ? 'supabase' : 'mock',
+    mockProducts: mock.products.length,
+    hint: supabase
+      ? 'If the site is empty, run supabase/seed.sql in Supabase SQL Editor'
+      : 'Using in-memory catalog; set SUPABASE_URL in server/.env for Supabase',
+  })
+);
 
 const api = express.Router();
 api.use('/categories', categoriesRouter);
@@ -57,4 +68,9 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`FrameCraft API running on http://localhost:${PORT}`);
+  if (supabase) {
+    console.log('Data source: Supabase (ensure seed.sql has been run — expect 42 products)');
+  } else {
+    console.log(`Data source: mock catalog (${mock.products.length} products, no Supabase env)`);
+  }
 });

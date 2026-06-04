@@ -7,7 +7,9 @@
   },
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "verify:supabase": "node scripts/verify-supabase.js",
+    "seed:supabase": "node scripts/seed-supabase.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",

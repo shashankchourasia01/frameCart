@@ -26,19 +26,20 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173)
 
-The API serves **mock products/categories/offers** when Supabase is not configured.
+The API serves **42 mock frames** when Supabase is not configured in `server/.env`.
 
-## Supabase setup
+**Site empty but Supabase is connected?** Your database likely has no products. See **[supabase/SUPABASE_SETUP.md](supabase/SUPABASE_SETUP.md)**.
+
+## Supabase setup (42 frames)
 
 1. Create a project at [supabase.com](https://supabase.com)
-2. Run `supabase/schema.sql`, then `supabase/rls_policies.sql`, then `supabase/seed.sql` in the SQL editor
-3. Create a Storage bucket `uploads` (public or signed URLs)
-4. Copy keys into `client/.env` and `server/.env` (see `.env.example` files)
-5. Create an admin user in Supabase Auth and set JWT custom claim `role` to `admin` if using RLS admin policies
+2. In SQL Editor, run in order: `schema.sql` → `rls_policies.sql` → `seed.sql` (full catalog)
+3. Copy **Project URL** + **service_role** key into `server/.env`
+4. Copy **anon** key into `client/.env` for admin login
 
-## Images
+Full steps: **[supabase/SUPABASE_SETUP.md](supabase/SUPABASE_SETUP.md)**
 
-All hero, category banners, product gallery, and design thumbnails use **blank placeholders** until you upload assets via the admin panel or set URLs in the database.
+Check API: `http://localhost:5000/health` should show `dataSource` and product count hints.
 
 ## Scripts
 

@@ -6,6 +6,9 @@
     "dev:server": "npm run dev --prefix server",
     "install:client": "npm install --prefix client",
     "build": "npm run build --prefix client",
-    "build:vercel": "npm install --prefix client && npm run build --prefix client"
+    "build:vercel": "npm install --prefix client && npm run build --prefix client",
+    "setup:env": "powershell -ExecutionPolicy Bypass -File scripts/setup-env.ps1",
+    "verify:supabase": "npm run verify:supabase --prefix server",
+    "seed:supabase": "npm run seed:supabase --prefix server"
   }
 }

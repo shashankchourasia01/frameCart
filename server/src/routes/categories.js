@@ -13,7 +13,10 @@ router.get('/', async (_req, res, next) => {
         .eq('is_active', true)
         .order('sort_order');
       if (error) throw error;
-      return res.json(data);
+      if (data?.length) return res.json(data);
+      console.warn(
+        '[categories] Supabase returned 0 categories — falling back to mock. Run supabase/seed.sql'
+      );
     }
     res.json(mock.categories);
   } catch (e) {

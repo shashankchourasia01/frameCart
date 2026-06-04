@@ -23,12 +23,18 @@ router.get('/', async (req, res, next) => {
       if (limit) q = q.limit(Number(limit));
       const { data, error } = await q;
       if (error) throw error;
-      return res.json(
-        data.map((p) => ({
-          ...p,
-          categories: p.categories ?? undefined,
-        }))
-      );
+      if (!data?.length) {
+        console.warn(
+          '[products] Supabase returned 0 products — falling back to mock. Run supabase/seed.sql (see SUPABASE_SETUP.md)'
+        );
+      } else {
+        return res.json(
+          data.map((p) => ({
+            ...p,
+            categories: p.categories ?? undefined,
+          }))
+        );
+      }
     }
 
     let list = store.listActive();
