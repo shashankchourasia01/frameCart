@@ -1,6 +1,9 @@
 const express = require('express');
 const { supabase } = require('../lib/supabase');
 const mock = require('../data/mock');
+const store = require('../lib/mockProductStore');
+
+store.init(mock.products);
 
 const router = express.Router();
 
@@ -28,7 +31,7 @@ router.get('/', async (req, res, next) => {
       );
     }
 
-    let list = [...mock.products];
+    let list = store.listActive();
     if (category) list = list.filter((p) => p.categories?.slug === category);
     if (featured === 'true') list = list.filter((p) => p.is_featured);
     if (bestseller === 'true') list = list.filter((p) => p.is_bestseller);
@@ -51,7 +54,7 @@ router.get('/:slug', async (req, res, next) => {
       if (error) throw error;
       return res.json(data);
     }
-    const product = mock.products.find((p) => p.slug === req.params.slug);
+    const product = store.findBySlug(req.params.slug, true);
     if (!product) return res.status(404).json({ message: 'Product not found' });
     res.json(product);
   } catch (e) {

@@ -2,9 +2,11 @@ const express = require('express');
 const { authMiddleware } = require('../middleware/authMiddleware');
 const { supabase } = require('../lib/supabase');
 const mock = require('../data/mock');
+const adminProductsRouter = require('./adminProducts');
 
 const router = express.Router();
 router.use(authMiddleware);
+router.use('/products', adminProductsRouter);
 
 router.get('/dashboard', async (_req, res) => {
   const ordersTrend = Array.from({ length: 7 }, (_, i) => {

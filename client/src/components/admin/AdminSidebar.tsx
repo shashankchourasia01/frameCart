@@ -9,30 +9,46 @@ const items = [
   { to: '/admin/offers', label: 'Offers', icon: '🎁' },
 ];
 
-export function AdminSidebar() {
+interface AdminSidebarProps {
+  mobile?: boolean;
+  onNavigate?: () => void;
+}
+
+export function AdminSidebar({ mobile, onNavigate }: AdminSidebarProps) {
   return (
-    <aside className="hidden w-60 shrink-0 bg-[#1A1A1A] text-white lg:block">
-      <div className="border-b border-white/10 p-6 font-display text-xl">FrameCraft Admin</div>
-      <nav className="p-4">
+    <aside
+      className={cn(
+        'flex w-full flex-col bg-[#1A1A1A] text-white',
+        mobile ? 'h-full' : 'hidden w-60 shrink-0 lg:flex lg:min-h-screen'
+      )}
+    >
+      <div className="border-b border-white/10 p-5 font-display text-lg sm:p-6 sm:text-xl">
+        FrameCraft Admin
+      </div>
+      <nav className="flex-1 space-y-1 p-3 sm:p-4">
         {items.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             end={item.end}
+            onClick={onNavigate}
             className={({ isActive }) =>
               cn(
-                'mb-1 flex items-center gap-3 rounded-lg px-4 py-3 text-sm transition',
+                'flex items-center gap-3 rounded-lg px-4 py-3 text-sm transition',
                 isActive
-                  ? 'border-l-4 border-brand-maroon bg-white/10'
+                  ? 'border-l-4 border-brand-maroon bg-white/10 font-medium'
                   : 'hover:bg-white/5'
               )
             }
           >
-            <span>{item.icon}</span>
+            <span aria-hidden>{item.icon}</span>
             {item.label}
           </NavLink>
         ))}
       </nav>
+      <p className="border-t border-white/10 p-4 text-xs text-white/40">
+        Store updates sync instantly after you save
+      </p>
     </aside>
   );
 }
