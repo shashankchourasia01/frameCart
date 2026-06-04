@@ -31,7 +31,13 @@ export function CategoryPage() {
   return (
     <div>
       <div className="relative h-56 sm:h-72 lg:h-80">
-        <img src={banner} alt={category?.name ?? slug} className="h-full w-full object-cover" />
+        <img
+          src={banner}
+          alt={category?.name ?? slug}
+          referrerPolicy="no-referrer"
+          decoding="async"
+          className="h-full w-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/40 to-transparent" />
         <div className="absolute inset-0 flex flex-col items-center justify-end px-4 pb-10 text-center">
           <span className="text-4xl" aria-hidden>

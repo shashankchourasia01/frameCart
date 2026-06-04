@@ -12,6 +12,8 @@ export function HeroBanner() {
       <img
         src={IMAGES.hero}
         alt="Premium photo frames on a gallery wall"
+        referrerPolicy="no-referrer"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-brand-charcoal/85 via-brand-charcoal/60 to-brand-charcoal/30" />

@@ -5,8 +5,10 @@ import { ProductCard } from '../product/ProductCard';
 import { ProductCardSkeleton } from '../product/ProductCardSkeleton';
 import { staggerContainer, fadeUp } from '../../animations/variants';
 
+const BESTSELLER_LIMIT = 16;
+
 export function BestsellerGrid() {
-  const { data: products, isLoading } = useProducts({ bestseller: true, limit: 12 });
+  const { data: products, isLoading } = useProducts({ bestseller: true, limit: BESTSELLER_LIMIT });
 
   return (
     <section className="section-padding bg-brand-ivory-dark/40">
@@ -44,10 +46,10 @@ export function BestsellerGrid() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+          className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
         >
           {isLoading
-            ? Array.from({ length: 4 }).map((_, i) => (
+            ? Array.from({ length: 8 }).map((_, i) => (
                 <motion.div key={i} variants={fadeUp}>
                   <ProductCardSkeleton />
                 </motion.div>

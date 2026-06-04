@@ -30,23 +30,25 @@ export function LazyImage({
 
   return (
     <div className={cn('relative overflow-hidden bg-brand-ivory-dark', aspectClasses[aspect], className)}>
-      {!loaded && (
+      {!loaded && !failed && (
         <div className="absolute inset-0 animate-shimmer bg-shimmer bg-[length:200%_100%]" />
       )}
       <motion.img
         src={imageSrc}
         alt={alt}
         loading="lazy"
+        decoding="async"
+        referrerPolicy="no-referrer"
         onLoad={() => setLoaded(true)}
         onError={() => {
           if (!failed) {
-            setLoaded(false);
             setFailed(true);
+            setLoaded(true);
           }
         }}
-        initial={{ opacity: 0.5 }}
-        animate={{ opacity: loaded ? 1 : 0.5 }}
-        transition={{ duration: 0.4 }}
+        initial={{ opacity: 0.6 }}
+        animate={{ opacity: loaded || failed ? 1 : 0.6 }}
+        transition={{ duration: 0.35 }}
         className="h-full w-full object-cover"
       />
     </div>

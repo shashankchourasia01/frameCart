@@ -3,7 +3,7 @@ import { useOffers } from '../hooks/useOffers';
 import { CouponChip } from '../components/shared/CouponChip';
 import { formatPrice } from '../lib/utils';
 import { pageTransition } from '../animations/variants';
-import { IMAGES } from '../constants/images';
+import { IMAGES, getOfferBanner } from '../constants/images';
 
 export function OffersPage() {
   const { data: offers, isLoading } = useOffers();
@@ -42,9 +42,14 @@ export function OffersPage() {
                 o.is_featured ? 'ring-2 ring-brand-gold/40' : ''
               }`}
             >
-              {o.banner_image_url && (
+              {getOfferBanner(o.banner_image_url) && (
                 <div className="relative h-36">
-                  <img src={o.banner_image_url} alt="" className="h-full w-full object-cover" />
+                  <img
+                    src={getOfferBanner(o.banner_image_url)}
+                    alt=""
+                    referrerPolicy="no-referrer"
+                    className="h-full w-full object-cover"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 </div>
               )}

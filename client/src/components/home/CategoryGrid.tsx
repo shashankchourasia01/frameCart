@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useCategories } from '../../hooks/useCategories';
 import { fadeUp, staggerContainer } from '../../animations/variants';
 import { getCategoryThumb } from '../../constants/images';
+import { LazyImage } from '../shared/LazyImage';
 
 export function CategoryGrid() {
   const { data: categories, isLoading } = useCategories();
@@ -51,18 +52,18 @@ export function CategoryGrid() {
               <motion.div key={cat.id} variants={fadeUp}>
                 <Link to={`/category/${cat.slug}`} className="group block">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-card shadow-card transition duration-300 group-hover:-translate-y-1 group-hover:shadow-card-hover">
-                    <img
+                    <LazyImage
                       src={getCategoryThumb(cat.slug, cat.image_url)}
                       alt={cat.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                      aspect="auto"
+                      className="absolute inset-0 !h-full !w-full"
                     />
-                    <div className="image-overlay" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/5" />
                     <div className="absolute inset-x-0 bottom-0 p-4">
-                      <span className="text-2xl" aria-hidden>
+                      <span className="text-2xl drop-shadow-md" aria-hidden>
                         {cat.emoji ?? '🖼️'}
                       </span>
-                      <p className="mt-1 font-heading text-sm font-semibold text-white sm:text-base">
+                      <p className="mt-1 font-heading text-sm font-semibold text-white drop-shadow sm:text-base">
                         {cat.name}
                       </p>
                     </div>
