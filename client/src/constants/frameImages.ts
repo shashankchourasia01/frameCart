@@ -46,7 +46,7 @@ export function getFrameImageUrls(slug: string, count = 3) {
   );
 }
 
-/** Card thumbnail — smaller width, unique design per product */
-export function getFrameCardImage(slug: string) {
-  return framePexelsUrl(FRAME_ONLY_PEXELS[frameIndexForSlug(slug)], 420);
+/** Card / grid — frame-only, unique design per product */
+export function getFrameCardImage(slug: string, width = 600) {
+  return framePexelsUrl(FRAME_ONLY_PEXELS[frameIndexForSlug(slug)], width);
 }

@@ -121,9 +121,9 @@ export function getProductImage(slug: string, images?: string[] | null) {
   return getProductImages(slug, images)[0];
 }
 
-/** Grid cards — always frame-only, smaller crop, unique per slug */
+/** Grid cards — frame-only photo, full tile crop */
 export function getProductCardImage(slug: string, _images?: string[] | null) {
-  return getFrameCardImage(slug);
+  return getFrameCardImage(slug, 600);
 }
 
 export function getDesignImage(name: string) {

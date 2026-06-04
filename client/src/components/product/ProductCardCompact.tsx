@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import type { Product } from '../../types';
 import { formatPrice } from '../../lib/utils';
 import { getProductCardImage } from '../../constants/images';
+import { LazyImage } from '../shared/LazyImage';
 import { cn } from '../../lib/utils';
 
 interface ProductCardCompactProps {
@@ -9,7 +10,7 @@ interface ProductCardCompactProps {
   className?: string;
 }
 
-/** Printo-style compact card — smaller centered frame photo */
+/** Printo-style compact card — full image in grid; detail page shows smaller preview */
 export function ProductCardCompact({ product, className }: ProductCardCompactProps) {
   const image = getProductCardImage(product.slug, product.images);
   const price = Number(product.base_price);
@@ -17,15 +18,8 @@ export function ProductCardCompact({ product, className }: ProductCardCompactPro
   return (
     <Link to={`/product/${product.slug}`} className={cn('block h-full', className)}>
       <article className="flex h-full flex-col overflow-hidden rounded-md border border-neutral-200 bg-white transition hover:border-brand-maroon/30 hover:shadow-sm">
-        <div className="relative flex h-[7.5rem] items-center justify-center bg-gradient-to-b from-neutral-50 to-neutral-100/80 px-3 py-4 sm:h-32">
-          <img
-            src={image}
-            alt={product.name}
-            loading="lazy"
-            decoding="async"
-            referrerPolicy="no-referrer"
-            className="max-h-[5.25rem] w-full max-w-[88%] object-contain drop-shadow-md sm:max-h-[5.75rem]"
-          />
+        <div className="relative overflow-hidden bg-neutral-50">
+          <LazyImage src={image} alt={product.name} className="w-full" aspect="square" />
           {product.is_bestseller && (
             <span className="absolute left-1.5 top-1.5 rounded-sm bg-brand-maroon px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide text-white shadow-sm">
               Bestseller

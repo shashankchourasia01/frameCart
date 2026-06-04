@@ -38,11 +38,11 @@ export function ProductRecommendations({ categorySlug, currentSlug }: ProductRec
                 to={`/product/${r.slug}`}
                 className="block overflow-hidden rounded-md border border-neutral-200 bg-white"
               >
-                <div className="flex h-[7.5rem] items-center justify-center bg-neutral-50 px-3 py-3">
+                <div className="aspect-square overflow-hidden bg-neutral-50">
                   <img
                     src={getProductCardImage(r.slug)}
                     alt=""
-                    className="max-h-[5rem] w-full max-w-[88%] object-contain drop-shadow-md"
+                    className="h-full w-full object-cover"
                     loading="lazy"
                   />
                 </div>

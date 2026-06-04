@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { LazyImage } from '../../shared/LazyImage';
 import { cn } from '../../../lib/utils';
 import { getProductImages } from '../../../constants/images';
 import { HiChevronRight } from '../../icons';
@@ -27,9 +26,9 @@ export function PrintoProductGallery({
 
   return (
     <div className="bg-white">
-      <div className="relative aspect-square w-full bg-neutral-50">
+      <div className="relative flex min-h-[11rem] w-full items-center justify-center bg-gradient-to-b from-neutral-50 to-neutral-100/90 px-6 py-8 sm:min-h-[13rem]">
         {showSizeChart ? (
-          <div className="flex h-full flex-col items-center justify-center p-6 text-center">
+          <div className="flex w-full flex-col items-center justify-center py-2 text-center">
             <p className="text-sm font-bold text-brand-charcoal">Available sizes</p>
             <ul className="mt-4 space-y-2 text-sm text-brand-charcoal-light">
               {sizeLabels.map((s) => (
@@ -41,7 +40,14 @@ export function PrintoProductGallery({
             <p className="mt-4 text-xs text-brand-charcoal-light">Select size below to continue</p>
           </div>
         ) : mainSrc ? (
-          <LazyImage src={mainSrc} alt="Product" className="h-full w-full object-cover" aspect="square" />
+          <img
+            src={mainSrc}
+            alt="Product"
+            className="max-h-[9.5rem] w-full max-w-[min(100%,18rem)] object-contain drop-shadow-md sm:max-h-[11rem]"
+            loading="eager"
+            decoding="async"
+            referrerPolicy="no-referrer"
+          />
         ) : null}
       </div>
 
