@@ -82,10 +82,19 @@ function CustomerLayout() {
 
 function AnimatedRoutes() {
   const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  const routeKey = isAdminRoute ? 'admin-shell' : location.pathname;
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div key={location.pathname} variants={pageTransition} initial="initial" animate="animate" exit="exit">
+    <AnimatePresence mode={isAdminRoute ? 'sync' : 'wait'}>
+      <motion.div
+        key={routeKey}
+        variants={isAdminRoute ? undefined : pageTransition}
+        initial={isAdminRoute ? false : 'initial'}
+        animate={isAdminRoute ? undefined : 'animate'}
+        exit={isAdminRoute ? undefined : 'exit'}
+        className={isAdminRoute ? 'min-h-screen w-full overflow-x-hidden bg-neutral-50' : undefined}
+      >
         <Suspense fallback={<Loading />}>
           <Routes location={location}>
             <Route path="/" element={<HomePage />} />
@@ -124,7 +133,7 @@ function AppShell() {
   <div className="min-h-screen bg-brand-ivory">
     <ScrollToTop />
     <CustomerLayout />
-    <main className={!isAdmin ? 'pb-20 md:pb-0' : ''}>
+    <main className={!isAdmin ? 'pb-20 md:pb-0' : 'min-h-screen w-full overflow-x-hidden bg-neutral-50'}>
       <AnimatedRoutes />
     </main>
     {!isAdmin && (

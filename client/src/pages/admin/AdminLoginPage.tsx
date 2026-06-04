@@ -15,7 +15,7 @@ export function AdminLoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#1A1A1A] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-neutral-50 px-4">
       <form
         onSubmit={(e) => void handleSubmit(e)}
         className="w-full max-w-md rounded-xl bg-white p-8 shadow-xl"

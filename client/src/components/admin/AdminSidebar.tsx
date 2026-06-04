@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { cn } from '../../lib/utils';
-import { AppIcon, ADMIN_NAV_ICONS, type AdminNavIconKey } from '../icons';
+import { AppIcon, ADMIN_NAV_ICONS, CloseIcon, type AdminNavIconKey } from '../icons';
 
 const items: { to: string; label: string; icon: AdminNavIconKey; end?: boolean }[] = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
@@ -13,20 +13,36 @@ const items: { to: string; label: string; icon: AdminNavIconKey; end?: boolean }
 interface AdminSidebarProps {
   mobile?: boolean;
   onNavigate?: () => void;
+  onClose?: () => void;
 }
 
-export function AdminSidebar({ mobile, onNavigate }: AdminSidebarProps) {
+export function AdminSidebar({ mobile, onNavigate, onClose }: AdminSidebarProps) {
   return (
     <aside
       className={cn(
-        'flex w-full flex-col bg-[#1A1A1A] text-white',
-        mobile ? 'h-full' : 'hidden w-60 shrink-0 lg:flex lg:min-h-screen'
+        'flex shrink-0 flex-col border-neutral-200 bg-white text-brand-charcoal',
+        mobile
+          ? 'h-full w-full max-w-full border-r shadow-sm'
+          : 'fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r shadow-sm lg:flex'
       )}
     >
-      <div className="border-b border-white/10 p-5 font-display text-lg sm:p-6 sm:text-xl">
-        FrameCraft Admin
+      <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-4">
+        <div className="min-w-0">
+          <p className="truncate font-display text-lg font-bold text-brand-maroon">FrameCraft</p>
+          <p className="text-[11px] font-medium text-brand-charcoal-light">Admin panel</p>
+        </div>
+        {mobile && onClose ? (
+          <button
+            type="button"
+            onClick={onClose}
+            className="shrink-0 rounded-lg border border-neutral-200 p-2 hover:bg-neutral-50"
+            aria-label="Close menu"
+          >
+            <CloseIcon size="md" />
+          </button>
+        ) : null}
       </div>
-      <nav className="flex-1 space-y-1 p-3 sm:p-4">
+      <nav className="flex-1 space-y-0.5 overflow-y-auto overflow-x-hidden p-3">
         {items.map((item) => (
           <NavLink
             key={item.to}
@@ -35,20 +51,20 @@ export function AdminSidebar({ mobile, onNavigate }: AdminSidebarProps) {
             onClick={onNavigate}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 rounded-lg px-4 py-3 text-sm transition',
+                'flex w-full max-w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition',
                 isActive
-                  ? 'border-l-4 border-brand-maroon bg-white/10 font-medium'
-                  : 'hover:bg-white/5'
+                  ? 'bg-brand-maroon-light text-brand-maroon ring-1 ring-inset ring-brand-maroon/20'
+                  : 'text-brand-charcoal hover:bg-neutral-50'
               )
             }
           >
-            <AppIcon icon={ADMIN_NAV_ICONS[item.icon]} size="md" className="text-brand-gold-light" />
-            {item.label}
+            <AppIcon icon={ADMIN_NAV_ICONS[item.icon]} size="md" className="shrink-0 text-brand-maroon" />
+            <span className="truncate">{item.label}</span>
           </NavLink>
         ))}
       </nav>
-      <p className="border-t border-white/10 p-4 text-xs text-white/40">
-        Store updates sync instantly after you save
+      <p className="shrink-0 border-t border-neutral-200 p-3 text-[10px] leading-relaxed text-brand-charcoal-light">
+        Changes sync to the storefront after you save.
       </p>
     </aside>
   );

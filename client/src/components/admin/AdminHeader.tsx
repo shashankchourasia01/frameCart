@@ -18,13 +18,13 @@ export function AdminHeader({ title, subtitle, onMenuClick }: AdminHeaderProps) 
   const openMenu = onMenuClick ?? layout?.openMobileNav;
 
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b bg-white px-4 py-3 sm:px-6 sm:py-4">
+    <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-neutral-200 bg-white px-4 py-3 shadow-sm sm:px-6 sm:py-4">
       <div className="flex min-w-0 items-center gap-3">
         {openMenu ? (
           <button
             type="button"
             onClick={openMenu}
-            className="rounded-lg border p-2 lg:hidden"
+            className="rounded-lg border border-neutral-200 bg-white p-2 text-brand-charcoal hover:bg-neutral-50 lg:hidden"
             aria-label="Open menu"
           >
             <MenuIcon size="md" />
