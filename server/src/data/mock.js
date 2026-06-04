@@ -3,74 +3,19 @@ const pexels = (id, w = 800, h) => {
   return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}${hp}&fit=crop`;
 };
 
-const categories = [
-  {
-    id: '1',
-    name: 'Wedding',
-    slug: 'wedding',
-    emoji: '💒',
-    description: 'Celebrate your special day',
-    image_url: pexels(265763, 600, 800),
-    banner_url: pexels(265763, 1600, 900),
-    sort_order: 1,
-    is_active: true,
-  },
-  {
-    id: '2',
-    name: 'Anniversary',
-    slug: 'anniversary',
-    emoji: '💑',
-    description: 'Mark every year together',
-    image_url: pexels(1444442, 600, 800),
-    banner_url: pexels(1444442, 1600, 900),
-    sort_order: 2,
-    is_active: true,
-  },
-  {
-    id: '3',
-    name: 'Baby',
-    slug: 'baby',
-    emoji: '👶',
-    description: 'Welcome the little one',
-    image_url: pexels(1648387, 600, 800),
-    banner_url: pexels(3556686, 1600, 900),
-    sort_order: 3,
-    is_active: true,
-  },
-  {
-    id: '4',
-    name: 'Family',
-    slug: 'family',
-    emoji: '👨‍👩‍👧',
-    description: 'Cherish family moments',
-    image_url: pexels(1024993, 600, 800),
-    banner_url: pexels(3778558, 1600, 900),
-    sort_order: 4,
-    is_active: true,
-  },
-  {
-    id: '5',
-    name: 'Couple',
-    slug: 'couple',
-    emoji: '❤️',
-    description: 'Romantic frames',
-    image_url: pexels(1451903, 600, 800),
-    banner_url: pexels(2253875, 1600, 900),
-    sort_order: 5,
-    is_active: true,
-  },
-  {
-    id: '6',
-    name: 'Graduation',
-    slug: 'graduation',
-    emoji: '🎓',
-    description: 'Proud achievements',
-    image_url: pexels(2673996, 600, 800),
-    banner_url: pexels(256490, 1600, 900),
-    sort_order: 6,
-    is_active: true,
-  },
-];
+const { CATEGORY_LIST } = require('./productCatalog');
+
+const categories = CATEGORY_LIST.map((c, index) => ({
+  id: c.id,
+  name: c.name,
+  slug: c.slug,
+  emoji: c.emoji,
+  description: c.description,
+  image_url: pexels(c.thumb, 600, 800),
+  banner_url: pexels(c.banner, 1600, 900),
+  sort_order: index + 1,
+  is_active: true,
+}));
 
 const FRAME_IMAGES = [
   pexels(1571468, 900),

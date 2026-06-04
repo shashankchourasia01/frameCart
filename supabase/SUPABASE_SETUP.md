@@ -1,4 +1,4 @@
-# Supabase setup — show all 42 frames on the website
+# Supabase setup — show all 50 frames on the website
 
 The API loads products from **Supabase** when `server/.env` has `SUPABASE_URL` and `SUPABASE_SERVICE_KEY`.  
 If those are set but the database is **empty** (or only the old 2-product seed), the site will look **blank**.
@@ -23,13 +23,13 @@ Open **SQL Editor** in Supabase and run each file **once**, in this order:
 | 1 | `supabase/schema.sql` | Tables |
 | 2 | `supabase/rls_policies.sql` | Public read access |
 | 3 | `supabase/migrations/20250604_order_customer_address.sql` | Order address columns (if upgrading) |
-| 4 | `supabase/seed.sql` | **6 categories + 42 frames + offers** |
+| 4 | `supabase/seed.sql` | **10 categories + 50 frames + offers** |
 
 After step 4, verify:
 
 ```sql
-SELECT COUNT(*) FROM categories;  -- should be 6
-SELECT COUNT(*) FROM products;    -- should be 42
+SELECT COUNT(*) FROM categories;  -- should be 10
+SELECT COUNT(*) FROM products;    -- should be 50
 ```
 
 ### 3. Configure `server/.env`

@@ -6,7 +6,7 @@ import { ProductCardSkeleton } from '../product/ProductCardSkeleton';
 import { staggerContainer, fadeUp } from '../../animations/variants';
 import { HiArrowRight } from '../icons';
 
-const BESTSELLER_LIMIT = 42;
+const BESTSELLER_LIMIT = 50;
 
 export function BestsellerGrid() {
   const { data: products, isLoading } = useProducts({ bestseller: true, limit: BESTSELLER_LIMIT });

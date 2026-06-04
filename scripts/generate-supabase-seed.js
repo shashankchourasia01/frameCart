@@ -4,7 +4,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const { CATALOG } = require('../server/src/data/productCatalog');
+const { CATALOG, CATEGORY_LIST } = require('../server/src/data/productCatalog');
 
 const PEXELS = [
   1571468, 1128318, 271624, 1579715, 17742, 1571463, 584399, 1451903, 265763, 1444442,
@@ -12,14 +12,9 @@ const PEXELS = [
   1080721, 1571465, 1913472,
 ];
 
-const CATEGORY_META = {
-  wedding: { emoji: '💒', desc: 'Celebrate your special day', thumb: 265763, banner: 265763 },
-  anniversary: { emoji: '💑', desc: 'Mark every year together', thumb: 1444442, banner: 1444442 },
-  baby: { emoji: '👶', desc: 'Welcome the little one', thumb: 1648387, banner: 3556686 },
-  family: { emoji: '👨‍👩‍👧', desc: 'Cherish family moments', thumb: 1024993, banner: 3778558 },
-  couple: { emoji: '❤️', desc: 'Romantic frames for two', thumb: 1451903, banner: 2253875 },
-  graduation: { emoji: '🎓', desc: 'Proud achievements', thumb: 2673996, banner: 256490 },
-};
+const CATEGORY_META = Object.fromEntries(
+  CATEGORY_LIST.map((c) => [c.slug, { emoji: c.emoji, desc: c.description, thumb: c.thumb, banner: c.banner }])
+);
 
 function pexels(id, w, h) {
   const hp = h ? `&h=${h}` : '';
@@ -54,16 +49,12 @@ DELETE FROM offers;
 
 `;
 
-const slugs = [...new Set(CATALOG.map((p) => p.categorySlug))];
-let sort = 1;
-for (const slug of slugs) {
-  const m = CATEGORY_META[slug];
-  const catName = CATALOG.find((p) => p.categorySlug === slug).categoryName;
+CATEGORY_LIST.forEach((c, idx) => {
+  const m = CATEGORY_META[c.slug];
   sql += `INSERT INTO categories (name, slug, emoji, description, image_url, banner_url, sort_order) VALUES
-  ('${esc(catName)}', '${slug}', '${m.emoji}', '${esc(m.desc)}',
-   '${pexels(m.thumb, 600, 800)}', '${pexels(m.banner, 1600, 900)}', ${sort});\n\n`;
-  sort += 1;
-}
+  ('${esc(c.name)}', '${c.slug}', '${m.emoji}', '${esc(m.desc)}',
+   '${pexels(m.thumb, 600, 800)}', '${pexels(m.banner, 1600, 900)}', ${idx + 1});\n\n`;
+});
 
 CATALOG.forEach((p, i) => {
   const featured = p.is_featured ? 'true' : 'false';

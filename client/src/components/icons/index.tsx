@@ -18,6 +18,7 @@ import {
   HiCurrencyRupee,
   HiGift,
   HiHeart,
+  HiHome,
   HiInformationCircle,
   HiMinus,
   HiMoon,
@@ -99,6 +100,10 @@ const CATEGORY_ICON_MAP: Record<string, IconType> = {
   family: HiUserGroup,
   couple: HiHeart,
   graduation: HiAcademicCap,
+  birthday: HiGift,
+  friendship: HiUserGroup,
+  housewarming: HiHome,
+  festival: HiSparkles,
 };
 
 export function CategoryIcon({

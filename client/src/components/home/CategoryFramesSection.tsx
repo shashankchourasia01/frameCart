@@ -7,7 +7,7 @@ import { ProductCardSkeleton } from '../product/ProductCardSkeleton';
 import { CategoryIcon, HiArrowRight } from '../icons';
 import { fadeUp, staggerContainer } from '../../animations/variants';
 
-const FRAMES_PER_CATEGORY = 6;
+const FRAMES_PER_CATEGORY = 5;
 
 function CategoryRow({ slug, name }: { slug: string; name: string }) {
   const { data: products, isLoading } = useProducts({ category: slug, limit: FRAMES_PER_CATEGORY });

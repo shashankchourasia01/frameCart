@@ -39,8 +39,8 @@ async function main() {
   const offerCount = offers.count ?? 0;
 
   console.log('\n✓ Connected to Supabase');
-  console.log(`  Categories: ${categories} (expect 6)`);
-  console.log(`  Active products: ${products} (expect 42)`);
+  console.log(`  Categories: ${categories} (expect 10)`);
+  console.log(`  Active products: ${products} (expect 50)`);
   console.log(`  Active offers: ${offerCount} (expect 2)`);
 
   if (products === 0) {
@@ -49,8 +49,8 @@ async function main() {
     process.exit(1);
   }
 
-  if (products < 42) {
-    console.warn('\n⚠ Fewer than 42 products — re-run supabase/seed.sql to load the full catalog.\n');
+  if (products < 50) {
+    console.warn('\n⚠ Fewer than 50 products — run npm run seed:supabase to load the full catalog.\n');
   } else {
     console.log('\n✓ Catalog ready. Start API: npm run dev (in server/)\n');
   }

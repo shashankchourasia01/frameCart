@@ -1,25 +1,16 @@
 /**
- * Load full catalog (6 categories, 42 products, 2 offers) into Supabase.
+ * Load full catalog (10 categories, 50 products, 2 offers) into Supabase.
  * Run: node scripts/seed-supabase.js  (from server/, uses server/.env)
  */
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const { createClient } = require('@supabase/supabase-js');
-const { CATALOG } = require('../src/data/productCatalog');
+const { CATALOG, CATEGORY_LIST } = require('../src/data/productCatalog');
 
 const PEXELS = [
   1571468, 1128318, 271624, 1579715, 17742, 1571463, 584399, 1451903, 265763, 1444442,
   1024993, 3778558, 1648387, 3556686, 2253875, 2673996, 256490, 3992946, 3181718, 1571460,
   1080721, 1571465, 1913472,
 ];
-
-const CATEGORY_META = {
-  wedding: { emoji: '💒', desc: 'Celebrate your special day', thumb: 265763, banner: 265763 },
-  anniversary: { emoji: '💑', desc: 'Mark every year together', thumb: 1444442, banner: 1444442 },
-  baby: { emoji: '👶', desc: 'Welcome the little one', thumb: 1648387, banner: 3556686 },
-  family: { emoji: '👨‍👩‍👧', desc: 'Cherish family moments', thumb: 1024993, banner: 3778558 },
-  couple: { emoji: '❤️', desc: 'Romantic frames for two', thumb: 1451903, banner: 2253875 },
-  graduation: { emoji: '🎓', desc: 'Proud achievements', thumb: 2673996, banner: 256490 },
-};
 
 const SIZES = [
   { label: '6x8', inches: '6x8', price_add: 0 },
@@ -60,21 +51,16 @@ async function main() {
     if (error) throw error;
   }
 
-  const slugs = [...new Set(CATALOG.map((p) => p.categorySlug))];
-  const categoryRows = slugs.map((slug, idx) => {
-    const m = CATEGORY_META[slug];
-    const name = CATALOG.find((p) => p.categorySlug === slug).categoryName;
-    return {
-      name,
-      slug,
-      emoji: m.emoji,
-      description: m.desc,
-      image_url: pexels(m.thumb, 600, 800),
-      banner_url: pexels(m.banner, 1600, 900),
-      sort_order: idx + 1,
-      is_active: true,
-    };
-  });
+  const categoryRows = CATEGORY_LIST.map((c, idx) => ({
+    name: c.name,
+    slug: c.slug,
+    emoji: c.emoji,
+    description: c.description,
+    image_url: pexels(c.thumb, 600, 800),
+    banner_url: pexels(c.banner, 1600, 900),
+    sort_order: idx + 1,
+    is_active: true,
+  }));
 
   const { data: categories, error: catErr } = await supabase.from('categories').insert(categoryRows).select('id, slug');
   if (catErr) throw catErr;

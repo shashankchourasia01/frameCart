@@ -64,6 +64,22 @@ export const CATEGORY_IMAGES: Record<string, { thumb: string; banner: string }> 
     thumb: pexels(2673996, 600, 800),
     banner: pexels(256490, 1600, 900),
   },
+  birthday: {
+    thumb: pexels(3181718, 600, 800),
+    banner: pexels(1128318, 1600, 900),
+  },
+  friendship: {
+    thumb: pexels(17742, 600, 800),
+    banner: pexels(3992946, 1600, 900),
+  },
+  housewarming: {
+    thumb: pexels(1571460, 600, 800),
+    banner: pexels(584399, 1600, 900),
+  },
+  festival: {
+    thumb: pexels(1080721, 600, 800),
+    banner: pexels(1571468, 1600, 900),
+  },
 };
 
 export const PRODUCT_IMAGES: Record<string, string[]> = {

@@ -69,7 +69,7 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`FrameCraft API running on http://localhost:${PORT}`);
   if (supabase) {
-    console.log('Data source: Supabase (ensure seed.sql has been run — expect 42 products)');
+    console.log('Data source: Supabase (ensure seed has been run — expect 10 categories, 50 products)');
   } else {
     console.log(`Data source: mock catalog (${mock.products.length} products, no Supabase env)`);
   }
