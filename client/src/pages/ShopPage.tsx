@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CategoryIconGrid } from '../components/shop/CategoryIconGrid';
-import { HiArrowRight } from '../components/icons';
 
 export function ShopPage() {
   return (
@@ -46,24 +44,10 @@ export function ShopPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-2xl px-4 sm:px-6">
-        <div className="rounded-2xl border border-brand-maroon/15 bg-brand-maroon-light/50 p-6 text-center sm:p-8">
-          <h2 className="font-display text-lg font-bold text-brand-charcoal sm:text-xl">
-            Not sure where to start?
-          </h2>
-          <p className="mt-2 text-sm text-brand-charcoal-light">
-            Browse our bestsellers or chat with us on WhatsApp for a recommendation.
-          </p>
-          <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link to="/" className="btn-primary inline-flex items-center gap-2">
-              View bestsellers
-              <HiArrowRight className="h-4 w-4" />
-            </Link>
-            <Link to="/offers" className="btn-outline">
-              See offers
-            </Link>
-          </div>
-        </div>
+      <section className="mx-auto max-w-2xl border-t border-neutral-100 px-4 py-8 text-center sm:px-6">
+        <p className="text-xs text-brand-charcoal-light">
+          Changes from admin appear on the shop within seconds when Supabase is connected.
+        </p>
       </section>
     </div>
   );

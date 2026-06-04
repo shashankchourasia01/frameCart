@@ -13,6 +13,7 @@ function invalidateProductQueries(
 ) {
   void queryClient.invalidateQueries({ queryKey: ['admin-products'] });
   void queryClient.invalidateQueries({ queryKey: ['products'] });
+  void queryClient.invalidateQueries({ queryKey: ['categories'] });
   if (product?.slug) {
     void queryClient.invalidateQueries({ queryKey: ['product', product.slug] });
   }
@@ -25,8 +26,9 @@ export function useAdminProducts() {
     queryKey: ['admin-products'],
     queryFn: () => apiFetch<Product[]>('/admin/products', { token: token ?? undefined }),
     enabled: Boolean(token),
-    staleTime: 15_000,
+    staleTime: 5_000,
     refetchOnWindowFocus: true,
+    refetchInterval: 30_000,
   });
 }
 

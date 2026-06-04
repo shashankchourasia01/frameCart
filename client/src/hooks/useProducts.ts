@@ -20,6 +20,9 @@ export function useProducts(params?: ProductsParams) {
   return useQuery({
     queryKey: ['products', params],
     queryFn: () => apiFetch<Product[]>(`/products${qs ? `?${qs}` : ''}`),
+    staleTime: 20_000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
   });
 }
 
@@ -28,5 +31,7 @@ export function useProduct(slug: string) {
     queryKey: ['product', slug],
     queryFn: () => apiFetch<Product>(`/products/${slug}`),
     enabled: Boolean(slug),
+    staleTime: 20_000,
+    refetchOnWindowFocus: true,
   });
 }
