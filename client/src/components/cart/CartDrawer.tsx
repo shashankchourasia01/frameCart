@@ -4,6 +4,7 @@ import { drawerVariants } from '../../animations/variants';
 import { useCartStore } from '../../store/cartStore';
 import { CartItem } from './CartItem';
 import { CartSummary } from './CartSummary';
+import { CloseIcon } from '../icons';
 
 export function CartDrawer() {
   const { isOpen, setOpen, items } = useCartStore();
@@ -28,7 +29,14 @@ export function CartDrawer() {
           >
             <div className="flex items-center justify-between border-b p-4">
               <h2 className="font-heading text-xl text-brand-maroon">Your Cart</h2>
-              <button type="button" onClick={() => setOpen(false)} aria-label="Close cart">✕</button>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close cart"
+                className="rounded-full p-1 hover:bg-brand-ivory-dark"
+              >
+                <CloseIcon size="md" />
+              </button>
             </div>
             <div className="flex-1 overflow-y-auto p-4">
               {items.length === 0 ? (

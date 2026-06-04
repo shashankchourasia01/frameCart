@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { ACCEPTED_IMAGE_TYPES, MAX_UPLOAD_SIZE_MB } from '../../../constants';
+import { CloseIcon } from '../../icons';
 
 interface ZoominPhotoUploaderProps {
   maxPhotos: number;
@@ -102,7 +103,7 @@ export function ZoominPhotoUploader({
                   className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand-error text-[10px] text-white"
                   aria-label="Remove"
                 >
-                  ✕
+                  <CloseIcon size="xs" className="text-white" />
                 </button>
               </div>
             ))}

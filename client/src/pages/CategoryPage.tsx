@@ -8,6 +8,7 @@ import { ProductCardSkeleton } from '../components/product/ProductCardSkeleton';
 import { EmptyState } from '../components/shared/EmptyState';
 import { fadeUp, staggerContainer } from '../animations/variants';
 import { getCategoryBanner } from '../constants/images';
+import { CategoryIcon } from '../components/icons';
 
 type SortKey = 'latest' | 'price-asc' | 'price-desc' | 'bestseller';
 
@@ -40,9 +41,7 @@ export function CategoryPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/40 to-transparent" />
         <div className="absolute inset-0 flex flex-col items-center justify-end px-4 pb-10 text-center">
-          <span className="text-4xl" aria-hidden>
-            {category?.emoji}
-          </span>
+          <CategoryIcon slug={slug} size="xl" className="bg-white/20" />
           <h1 className="mt-2 font-display text-4xl font-bold text-white sm:text-5xl">
             {category?.name ?? slug}
           </h1>

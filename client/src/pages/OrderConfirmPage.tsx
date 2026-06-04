@@ -1,4 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom';
+import { CheckIcon } from '../components/icons';
 
 export function OrderConfirmPage() {
   const [params] = useSearchParams();
@@ -6,7 +7,9 @@ export function OrderConfirmPage() {
 
   return (
     <div className="mx-auto max-w-lg px-4 py-16 text-center">
-      <span className="text-5xl">✓</span>
+      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-success/15 text-brand-success">
+        <CheckIcon size="xl" className="h-8 w-8" />
+      </span>
       <h1 className="mt-4 font-display text-3xl text-brand-maroon">Thank You!</h1>
       {orderNumber && (
         <p className="mt-2 text-brand-charcoal-light">Order #{orderNumber}</p>

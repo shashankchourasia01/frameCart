@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { cn } from '../../lib/utils';
+import { AppIcon, ADMIN_NAV_ICONS, type AdminNavIconKey } from '../icons';
 
-const items = [
-  { to: '/admin', label: 'Dashboard', icon: '📊', end: true },
-  { to: '/admin/orders', label: 'Orders', icon: '📦' },
-  { to: '/admin/products', label: 'Products', icon: '🖼️' },
-  { to: '/admin/categories', label: 'Categories', icon: '📁' },
-  { to: '/admin/offers', label: 'Offers', icon: '🎁' },
+const items: { to: string; label: string; icon: AdminNavIconKey; end?: boolean }[] = [
+  { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
+  { to: '/admin/orders', label: 'Orders', icon: 'orders' },
+  { to: '/admin/products', label: 'Products', icon: 'products' },
+  { to: '/admin/categories', label: 'Categories', icon: 'categories' },
+  { to: '/admin/offers', label: 'Offers', icon: 'offers' },
 ];
 
 interface AdminSidebarProps {
@@ -41,7 +42,7 @@ export function AdminSidebar({ mobile, onNavigate }: AdminSidebarProps) {
               )
             }
           >
-            <span aria-hidden>{item.icon}</span>
+            <AppIcon icon={ADMIN_NAV_ICONS[item.icon]} size="md" className="text-brand-gold-light" />
             {item.label}
           </NavLink>
         ))}

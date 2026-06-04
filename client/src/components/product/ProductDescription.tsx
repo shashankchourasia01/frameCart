@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AppIcon, FEATURE_ICONS, HiChevronDown, HiChevronUp, HiMinus, HiPlus, type FeatureIconKey } from '../icons';
 
 interface ProductDescriptionProps {
   description?: string;
@@ -10,10 +11,10 @@ export function ProductDescription({ description, materialInfo }: ProductDescrip
   const [open, setOpen] = useState(true);
   const [careOpen, setCareOpen] = useState(false);
 
-  const features = [
-    { icon: '🪵', title: 'Material', text: materialInfo ?? 'Premium quality materials' },
-    { icon: '🖨️', title: 'Print Quality', text: 'High-resolution archival prints' },
-    { icon: '📦', title: 'Packaging', text: 'Secure gift-ready packaging' },
+  const features: { icon: FeatureIconKey; title: string; text: string }[] = [
+    { icon: 'material', title: 'Material', text: materialInfo ?? 'Premium quality materials' },
+    { icon: 'print', title: 'Print Quality', text: 'High-resolution archival prints' },
+    { icon: 'packaging', title: 'Packaging', text: 'Secure gift-ready packaging' },
   ];
 
   return (
@@ -24,7 +25,7 @@ export function ProductDescription({ description, materialInfo }: ProductDescrip
         className="flex w-full items-center justify-between font-heading text-lg text-brand-maroon"
       >
         About This Frame
-        <span>{open ? '−' : '+'}</span>
+        {open ? <HiMinus className="h-5 w-5" /> : <HiPlus className="h-5 w-5" />}
       </button>
       <AnimatePresence>
         {open && (
@@ -38,7 +39,9 @@ export function ProductDescription({ description, materialInfo }: ProductDescrip
             <div className="mt-4 space-y-3">
               {features.map((f) => (
                 <div key={f.title} className="flex gap-3 text-sm">
-                  <span className="text-xl">{f.icon}</span>
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-maroon/10 text-brand-maroon">
+                    <AppIcon icon={FEATURE_ICONS[f.icon]} size="md" />
+                  </span>
                   <div>
                     <p className="font-semibold">{f.title}</p>
                     <p className="text-brand-charcoal-light">{f.text}</p>
@@ -49,9 +52,10 @@ export function ProductDescription({ description, materialInfo }: ProductDescrip
             <button
               type="button"
               onClick={() => setCareOpen(!careOpen)}
-              className="mt-4 text-sm font-medium text-brand-maroon"
+              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-maroon"
             >
-              Care Instructions {careOpen ? '▲' : '▼'}
+              Care Instructions
+              {careOpen ? <HiChevronUp className="h-4 w-4" /> : <HiChevronDown className="h-4 w-4" />}
             </button>
             {careOpen && (
               <p className="mt-2 text-sm text-brand-charcoal-light">

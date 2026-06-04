@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import type { ProductDesign } from '../../types';
 import { cn } from '../../lib/utils';
 import { getDesignImage } from '../../constants/images';
+import { CheckIcon } from '../icons';
 
 interface DesignSelectorProps {
   designs: ProductDesign[];
@@ -41,8 +42,8 @@ export function DesignSelector({ designs, selected, onSelect }: DesignSelectorPr
               {d.name}
             </span>
             {selected?.id === d.id && (
-              <span className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-maroon text-xs text-white">
-                ✓
+              <span className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-maroon text-white">
+                <CheckIcon size="xs" />
               </span>
             )}
           </motion.button>

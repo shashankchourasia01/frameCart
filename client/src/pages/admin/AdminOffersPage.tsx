@@ -1,6 +1,7 @@
 import { AdminHeader } from '../../components/admin/AdminHeader';
 import { useOffers } from '../../hooks/useOffers';
 import { formatPrice } from '../../lib/utils';
+import { StarIcon } from '../../components/icons';
 
 export function AdminOffersPage() {
   const { data: offers, isLoading } = useOffers();
@@ -37,7 +38,13 @@ export function AdminOffersPage() {
                         : formatPrice(Number(o.discount_value))}
                     </td>
                     <td className="p-3">{o.used_count}{o.max_uses ? ` / ${o.max_uses}` : ''}</td>
-                    <td className="p-3">{o.is_featured ? '★' : '—'}</td>
+                    <td className="p-3">
+                      {o.is_featured ? (
+                        <StarIcon filled size="sm" />
+                      ) : (
+                        <span className="text-brand-charcoal-light">—</span>
+                      )}
+                    </td>
                   </tr>
                 ))
               )}

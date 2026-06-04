@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { AdminHeader } from '../../components/admin/AdminHeader';
 import { StatCard } from '../../components/admin/StatCard';
+import { STAT_ICONS } from '../../components/icons';
 import { apiFetch } from '../../lib/utils';
 import { useAuthStore } from '../../store/authStore';
 import type { AdminDashboardStats } from '../../types';
@@ -31,10 +32,10 @@ export function AdminDashboard() {
       <AdminHeader title="Dashboard" />
       <div className="p-6">
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <StatCard label="Today's Orders" value={stats.todayOrders} icon="📦" trend="+12%" />
-          <StatCard label="Total Revenue" value={stats.totalRevenue} icon="💰" prefix="₹" />
-          <StatCard label="Pending Orders" value={stats.pendingOrders} icon="⏳" />
-          <StatCard label="Active Products" value={stats.activeProducts} icon="🖼️" />
+          <StatCard label="Today's Orders" value={stats.todayOrders} icon={STAT_ICONS.orders} trend="+12%" />
+          <StatCard label="Total Revenue" value={stats.totalRevenue} icon={STAT_ICONS.revenue} prefix="₹" />
+          <StatCard label="Pending Orders" value={stats.pendingOrders} icon={STAT_ICONS.pending} />
+          <StatCard label="Active Products" value={stats.activeProducts} icon={STAT_ICONS.products} />
         </div>
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <div className="rounded-xl border bg-white p-4">

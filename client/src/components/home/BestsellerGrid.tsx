@@ -4,6 +4,7 @@ import { useProducts } from '../../hooks/useProducts';
 import { ProductCard } from '../product/ProductCard';
 import { ProductCardSkeleton } from '../product/ProductCardSkeleton';
 import { staggerContainer, fadeUp } from '../../animations/variants';
+import { HiArrowRight } from '../icons';
 
 const BESTSELLER_LIMIT = 16;
 
@@ -37,7 +38,10 @@ export function BestsellerGrid() {
             to="/category/wedding"
             className="shrink-0 text-sm font-semibold text-brand-maroon transition hover:text-brand-maroon-dark"
           >
-            View All →
+            <span className="inline-flex items-center gap-1">
+              View All
+              <HiArrowRight className="h-4 w-4" />
+            </span>
           </Link>
         </div>
 

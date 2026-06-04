@@ -140,7 +140,7 @@ export function ProductConfigurePage() {
                 type="button"
                 className="mt-5 text-sm font-medium text-brand-maroon"
                 onClick={() =>
-                  toast('Outer frame size — photo may be cropped slightly for fit.', { icon: 'ℹ️' })
+                  toast('Outer frame size — photo may be cropped slightly for fit.')
                 }
               >
                 Frame size description

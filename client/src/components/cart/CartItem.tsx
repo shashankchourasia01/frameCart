@@ -2,6 +2,7 @@ import type { CartItem as CartItemType } from '../../types';
 import { useCartStore } from '../../store/cartStore';
 import { formatPrice } from '../../lib/utils';
 import { getProductImage } from '../../constants/images';
+import { CloseIcon, HiMinus, HiPlus } from '../icons';
 
 interface CartItemProps {
   item: CartItemType;
@@ -21,12 +22,12 @@ export function CartItem({ item }: CartItemProps) {
         </p>
         <div className="mt-2 flex items-center justify-between">
           <div className="flex items-center gap-2 rounded-full bg-brand-ivory px-2 py-1">
-            <button type="button" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-              −
+            <button type="button" onClick={() => updateQuantity(item.id, item.quantity - 1)} aria-label="Decrease quantity">
+              <HiMinus className="h-4 w-4" />
             </button>
             <span className="min-w-[1.5rem] text-center text-sm">{item.quantity}</span>
-            <button type="button" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-              +
+            <button type="button" onClick={() => updateQuantity(item.id, item.quantity + 1)} aria-label="Increase quantity">
+              <HiPlus className="h-4 w-4" />
             </button>
           </div>
           <span className="font-bold text-brand-maroon">
@@ -39,7 +40,7 @@ export function CartItem({ item }: CartItemProps) {
         onClick={() => removeItem(item.id)}
         className="text-brand-charcoal-light hover:text-brand-maroon"
       >
-        ✕
+        <CloseIcon size="sm" />
       </button>
     </div>
   );

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useCategories } from '../../hooks/useCategories';
 import { fadeUp, staggerContainer } from '../../animations/variants';
 import { getCategoryThumb } from '../../constants/images';
+import { CategoryIcon } from '../icons';
 import { LazyImage } from '../shared/LazyImage';
 
 export function CategoryGrid() {
@@ -60,9 +61,7 @@ export function CategoryGrid() {
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/5" />
                     <div className="absolute inset-x-0 bottom-0 p-4">
-                      <span className="text-2xl drop-shadow-md" aria-hidden>
-                        {cat.emoji ?? '🖼️'}
-                      </span>
+                      <CategoryIcon slug={cat.slug} size="md" className="mb-1 bg-white/25" />
                       <p className="mt-1 font-heading text-sm font-semibold text-white drop-shadow sm:text-base">
                         {cat.name}
                       </p>

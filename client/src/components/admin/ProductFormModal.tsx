@@ -14,6 +14,7 @@ import {
 import { useCategories } from '../../hooks/useCategories';
 import { useCreateProduct, useUpdateProduct } from '../../hooks/useAdminProducts';
 import type { Product } from '../../types';
+import { CloseIcon } from '../icons';
 
 interface ProductFormModalProps {
   open: boolean;
@@ -182,7 +183,7 @@ export function ProductFormModal({ open, product, onClose }: ProductFormModalPro
                 className="rounded-lg p-2 text-brand-charcoal-light hover:bg-gray-100"
                 aria-label="Close"
               >
-                ✕
+                <CloseIcon size="md" />
               </button>
             </div>
 
@@ -226,7 +227,7 @@ export function ProductFormModal({ open, product, onClose }: ProductFormModalPro
                         <option value="">Select category</option>
                         {(categories ?? []).map((c) => (
                           <option key={c.id} value={c.id}>
-                            {c.emoji} {c.name}
+                            {c.name}
                           </option>
                         ))}
                       </select>
@@ -500,7 +501,7 @@ export function ProductFormModal({ open, product, onClose }: ProductFormModalPro
                         onClick={() => set('images', form.images.filter((_, j) => j !== i))}
                         className="shrink-0 rounded-lg border px-2 text-xs text-red-600"
                       >
-                        ✕
+                        <CloseIcon size="xs" className="text-red-600" />
                       </button>
                     </div>
                   ))}

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { TRUST_SIGNALS } from '../../constants';
+import { TrustIcon } from '../icons';
 import { fadeUp, staggerContainer } from '../../animations/variants';
 
 export function TrustBar() {
@@ -18,9 +19,7 @@ export function TrustBar() {
             variants={fadeUp}
             className="flex items-center gap-2.5 rounded-full bg-brand-ivory px-5 py-2.5"
           >
-            <span className="text-lg" aria-hidden>
-              {item.icon}
-            </span>
+            <TrustIcon name={item.icon} size="md" />
             <span className="text-xs font-medium text-brand-charcoal sm:text-sm">{item.label}</span>
           </motion.div>
         ))}

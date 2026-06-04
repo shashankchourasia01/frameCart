@@ -3,6 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { drawerVariants } from '../../animations/variants';
 import { APP_NAME, BUSINESS_WHATSAPP } from '../../constants';
 import { openWhatsApp } from '../../lib/whatsapp';
+import {
+  AppIcon,
+  CloseIcon,
+  HiArrowRight,
+  HiBolt,
+  HiPhoto,
+  HiTruck,
+  WhatsAppIcon,
+} from '../icons';
 
 interface MobileMenuProps {
   open: boolean;
@@ -17,9 +26,9 @@ const links = [
 ];
 
 const features = [
-  { icon: '🚚', text: 'Free delivery above ₹499' },
-  { icon: '🖼️', text: 'Premium handcrafted frames' },
-  { icon: '⚡', text: 'Fast support on WhatsApp' },
+  { icon: HiTruck, text: 'Free delivery above ₹499' },
+  { icon: HiPhoto, text: 'Premium handcrafted frames' },
+  { icon: HiBolt, text: 'Fast support on WhatsApp' },
 ];
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
@@ -49,11 +58,11 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               </div>
               <button
                 type="button"
-                className="rounded-full p-2 text-xl text-brand-charcoal hover:bg-brand-ivory-dark"
+                className="rounded-full p-2 text-brand-charcoal hover:bg-brand-ivory-dark"
                 onClick={onClose}
                 aria-label="Close"
               >
-                ✕
+                <CloseIcon size="lg" />
               </button>
             </div>
 
@@ -66,7 +75,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                   className="flex items-center justify-between rounded-lg px-3 py-2.5 text-base font-medium text-brand-charcoal transition hover:bg-white hover:text-brand-maroon"
                 >
                   {link.label}
-                  <span aria-hidden>›</span>
+                  <HiArrowRight className="h-4 w-4 text-brand-charcoal-light" />
                 </Link>
               ))}
             </div>
@@ -75,8 +84,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               <p className="text-xs font-semibold uppercase tracking-wider text-brand-maroon">Why choose us</p>
               <ul className="mt-3 space-y-2 text-sm text-brand-charcoal">
                 {features.map((feature) => (
-                  <li key={feature.text} className="flex items-center gap-2">
-                    <span aria-hidden>{feature.icon}</span>
+                  <li key={feature.text} className="flex items-center gap-2.5">
+                    <AppIcon icon={feature.icon} size="sm" className="text-brand-maroon" />
                     <span>{feature.text}</span>
                   </li>
                 ))}
@@ -90,8 +99,9 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                   onClose();
                   openWhatsApp('Hi! I need help selecting a frame.');
                 }}
-                className="w-full rounded-btn bg-brand-whatsapp px-4 py-3 text-sm font-semibold text-white hover:bg-brand-whatsapp-dark"
+                className="flex w-full items-center justify-center gap-2 rounded-btn bg-brand-whatsapp px-4 py-3 text-sm font-semibold text-white hover:bg-brand-whatsapp-dark"
               >
+                <WhatsAppIcon size="md" />
                 Chat on WhatsApp
               </button>
               <p className="text-center text-xs text-brand-charcoal-light">Support: +{BUSINESS_WHATSAPP}</p>

@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { ACCEPTED_IMAGE_TYPES, MAX_UPLOAD_SIZE_MB } from '../../constants';
+import { CloseIcon, HiCamera } from '../icons';
+
 interface PhotoUploaderProps {
   maxPhotos: number;
   urls: string[];
@@ -81,7 +83,7 @@ export function PhotoUploader({ maxPhotos, urls, onChange }: PhotoUploaderProps)
         disabled={urls.length >= maxPhotos || uploading}
         className="mt-3 flex w-full flex-col items-center justify-center rounded-card border-2 border-dashed border-brand-maroon bg-brand-maroon-light/30 px-6 py-10 transition hover:bg-brand-maroon-light/50 disabled:opacity-50"
       >
-        <span className="text-3xl">📷</span>
+        <HiCamera className="h-10 w-10 text-brand-maroon" />
         <span className="mt-2 font-medium text-brand-maroon">Tap to upload or drag photos</span>
         <span className="text-xs text-brand-charcoal-light">JPG, PNG, HEIC — max {MAX_UPLOAD_SIZE_MB}MB</span>
       </motion.button>
@@ -114,7 +116,7 @@ export function PhotoUploader({ maxPhotos, urls, onChange }: PhotoUploaderProps)
                 className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-brand-error text-xs text-white"
                 aria-label="Remove photo"
               >
-                ✕
+                <CloseIcon size="xs" className="text-white" />
               </button>
             </div>
           ))}

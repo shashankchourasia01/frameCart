@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useOffers } from '../../hooks/useOffers';
+import { CloseIcon } from '../icons';
 
 const DISMISS_KEY = 'framecraft-offer-dismissed';
 
@@ -68,7 +69,7 @@ export function OfferBanner() {
             className="shrink-0 rounded p-1 text-white/70 transition hover:bg-white/10 hover:text-white"
             aria-label="Dismiss offer banner"
           >
-            ✕
+            <CloseIcon size="sm" />
           </button>
         </div>
       </motion.div>

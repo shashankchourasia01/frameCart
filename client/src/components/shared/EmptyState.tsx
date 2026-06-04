@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { fadeUp } from '../../animations/variants';
+import { AppIcon, HiPhoto } from '../icons';
 
 interface EmptyStateProps {
   title: string;
@@ -16,8 +17,8 @@ export function EmptyState({ title, description, actionLabel, onAction }: EmptyS
       animate="visible"
       className="flex flex-col items-center py-16 text-center"
     >
-      <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-brand-maroon-light text-4xl">
-        🖼️
+      <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-brand-maroon-light text-brand-maroon">
+        <AppIcon icon={HiPhoto} size="xl" className="h-10 w-10" />
       </div>
       <h3 className="font-heading text-xl text-brand-maroon">{title}</h3>
       {description && <p className="mt-2 max-w-sm text-brand-charcoal-light">{description}</p>}

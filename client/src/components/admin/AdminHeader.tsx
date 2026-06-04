@@ -1,5 +1,6 @@
 import { useOutletContext } from 'react-router-dom';
 import { useAdminAuth } from '../../hooks/useAdminAuth';
+import { MenuIcon } from '../icons';
 
 export interface AdminLayoutContext {
   openMobileNav: () => void;
@@ -23,10 +24,10 @@ export function AdminHeader({ title, subtitle, onMenuClick }: AdminHeaderProps) 
           <button
             type="button"
             onClick={openMenu}
-            className="rounded-lg border p-2 text-lg lg:hidden"
+            className="rounded-lg border p-2 lg:hidden"
             aria-label="Open menu"
           >
-            ☰
+            <MenuIcon size="md" />
           </button>
         ) : null}
         <div className="min-w-0">

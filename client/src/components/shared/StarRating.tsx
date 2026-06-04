@@ -1,3 +1,5 @@
+import { StarIcon } from '../icons';
+
 interface StarRatingProps {
   rating: number;
   count?: number;
@@ -5,14 +7,14 @@ interface StarRatingProps {
 }
 
 export function StarRating({ rating, count, size = 'md' }: StarRatingProps) {
-  const stars = Array.from({ length: 5 }, (_, i) => i + 1 <= Math.round(rating));
+  const rounded = Math.round(rating);
+  const iconSize = size === 'sm' ? 'sm' : 'md';
+
   return (
     <div className="flex items-center gap-1" aria-label={`Rating ${rating} out of 5`}>
-      <span className={size === 'sm' ? 'text-sm' : 'text-base'}>
-        {stars.map((filled, i) => (
-          <span key={i} className={filled ? 'text-brand-gold' : 'text-brand-ivory-dark'}>
-            ★
-          </span>
+      <span className="inline-flex gap-0.5">
+        {Array.from({ length: 5 }, (_, i) => (
+          <StarIcon key={i} filled={i < rounded} size={iconSize} />
         ))}
       </span>
       {count !== undefined && (

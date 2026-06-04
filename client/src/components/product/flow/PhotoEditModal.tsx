@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { HiArrowPath, HiPhoto, HiSwatch } from 'react-icons/hi2';
 import { cn } from '../../../lib/utils';
 
 type FilterMode = 'none' | 'warm' | 'mono';
@@ -46,7 +47,7 @@ export function PhotoEditModal({ photoUrl, onClose, onUpdate }: PhotoEditModalPr
             onClick={() => inputRef.current?.click()}
             className="flex flex-col items-center gap-1 text-[10px] font-semibold tracking-wide text-brand-charcoal-light"
           >
-            <span className="text-xl">🖼️</span>
+            <HiPhoto className="h-6 w-6 text-brand-maroon" />
             REPLACE PHOTO
           </button>
           <button
@@ -54,7 +55,7 @@ export function PhotoEditModal({ photoUrl, onClose, onUpdate }: PhotoEditModalPr
             onClick={() => setRotation((r) => (r + 90) % 360)}
             className="flex flex-col items-center gap-1 text-[10px] font-semibold tracking-wide text-brand-charcoal-light"
           >
-            <span className="text-xl">↻</span>
+            <HiArrowPath className="h-6 w-6 text-brand-maroon" />
             ROTATE RIGHT
           </button>
           <button
@@ -64,7 +65,7 @@ export function PhotoEditModal({ photoUrl, onClose, onUpdate }: PhotoEditModalPr
             }
             className="flex flex-col items-center gap-1 text-[10px] font-semibold tracking-wide text-brand-charcoal-light"
           >
-            <span className="text-xl">◎</span>
+            <HiSwatch className="h-6 w-6 text-brand-maroon" />
             FILTER
           </button>
         </div>

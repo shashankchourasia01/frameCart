@@ -4,12 +4,14 @@ export const ESTABLISHED = 1998;
 export const BUSINESS_WHATSAPP = import.meta.env.VITE_BUSINESS_WHATSAPP ?? '919876543210';
 export const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api/v1';
 
-export const TRUST_SIGNALS = [
-  { icon: '🖼️', label: '10,000+ Frames Delivered' },
-  { icon: '⭐', label: '4.9 Avg Rating' },
-  { icon: '🚚', label: 'Free Delivery ₹499+' },
-  { icon: '💬', label: 'WhatsApp Support' },
-] as const;
+import type { TrustIconKey } from '../components/icons';
+
+export const TRUST_SIGNALS: { icon: TrustIconKey; label: string }[] = [
+  { icon: 'frames', label: '10,000+ Frames Delivered' },
+  { icon: 'rating', label: '4.9 Avg Rating' },
+  { icon: 'delivery', label: 'Free Delivery ₹499+' },
+  { icon: 'support', label: 'WhatsApp Support' },
+];
 
 export const INSTRUCTION_CHIPS = [
   'Add name at bottom',

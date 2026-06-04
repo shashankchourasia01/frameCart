@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { staggerContainer, fadeUp } from '../../animations/variants';
 import { SinceBadge } from '../shared/SinceBadge';
 import { IMAGES } from '../../constants/images';
+import { StarIcon } from '../icons';
 
 const words = ['Turn', 'Memories', 'Into', 'Art'];
 
@@ -64,11 +65,16 @@ export function HeroBanner() {
           >
             {[
               { value: '10K+', label: 'Frames Delivered' },
-              { value: '4.9★', label: 'Customer Rating' },
+              { value: '4.9', label: 'Customer Rating', showStar: true },
               { value: '1998', label: 'Crafting Since' },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="font-display text-2xl font-bold text-brand-gold">{stat.value}</p>
+                <p className="flex items-center gap-1 font-display text-2xl font-bold text-brand-gold">
+                  {stat.value}
+                  {'showStar' in stat && stat.showStar ? (
+                    <StarIcon filled size="md" className="text-brand-gold" />
+                  ) : null}
+                </p>
                 <p className="mt-1 text-xs uppercase tracking-wider text-white/60">{stat.label}</p>
               </div>
             ))}
