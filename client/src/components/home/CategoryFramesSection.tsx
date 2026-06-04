@@ -41,19 +41,35 @@ function CategoryRow({ slug, name }: { slug: string; name: string }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
+          className="relative mt-8"
         >
-          {isLoading
-            ? Array.from({ length: FRAMES_PER_CATEGORY }).map((_, i) => (
-                <motion.div key={i} variants={fadeUp}>
-                  <ProductCardSkeleton />
-                </motion.div>
-              ))
-            : (products ?? []).map((p) => (
-                <motion.div key={p.id} variants={fadeUp}>
-                  <ProductCard product={p} />
-                </motion.div>
-              ))}
+          <div
+            className="-mx-4 flex gap-3 overflow-x-auto overscroll-x-contain scroll-smooth px-4 pb-3 scrollbar-hide snap-x snap-mandatory sm:-mx-6 sm:gap-4 sm:px-6 lg:-mx-8 lg:px-8"
+            aria-label={`${name} frames — scroll horizontally`}
+          >
+            {isLoading
+              ? Array.from({ length: FRAMES_PER_CATEGORY }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    className="w-[min(72vw,13.5rem)] shrink-0 snap-start sm:w-52 md:w-56"
+                  >
+                    <ProductCardSkeleton />
+                  </motion.div>
+                ))
+              : (products ?? []).map((p) => (
+                  <motion.div
+                    key={p.id}
+                    variants={fadeUp}
+                    className="w-[min(72vw,13.5rem)] shrink-0 snap-start sm:w-52 md:w-56"
+                  >
+                    <ProductCard product={p} />
+                  </motion.div>
+                ))}
+          </div>
+          <p className="mt-1 text-center text-[11px] text-brand-charcoal-light/80 sm:hidden">
+            Swipe to see more →
+          </p>
         </motion.div>
       </div>
     </section>
@@ -66,9 +82,11 @@ export function CategoryFramesSection() {
   if (isLoading) {
     return (
       <section className="section-padding bg-white">
-        <div className="mx-auto max-w-7xl grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <ProductCardSkeleton key={i} />
+        <div className="mx-auto max-w-7xl -mx-4 flex gap-3 overflow-x-auto px-4 scrollbar-hide sm:-mx-6 sm:px-6">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="w-[min(72vw,13.5rem)] shrink-0 sm:w-52">
+              <ProductCardSkeleton />
+            </div>
           ))}
         </div>
       </section>
@@ -81,7 +99,7 @@ export function CategoryFramesSection() {
         <div className="mx-auto max-w-7xl text-center">
           <h2 className="section-title">Frames for Every Occasion</h2>
           <p className="section-subtitle mx-auto mt-2">
-            Browse curated collections — 7+ designs in each category
+            Browse curated collections — swipe through 5 designs per category
           </p>
         </div>
       </div>
