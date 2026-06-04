@@ -4,6 +4,7 @@ import {
   HiAcademicCap,
   HiArchiveBox,
   HiArrowRight,
+  HiArrowUpTray,
   HiBars3,
   HiBolt,
   HiCalendarDays,
@@ -184,6 +185,7 @@ export const FEATURE_ICONS: Record<FeatureIconKey, IconType> = {
 
 export {
   HiArrowRight,
+  HiArrowUpTray,
   HiChevronRight,
   HiChevronDown,
   HiChevronUp,

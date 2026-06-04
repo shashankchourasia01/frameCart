@@ -17,31 +17,12 @@ const categories = CATEGORY_LIST.map((c, index) => ({
   is_active: true,
 }));
 
-const FRAME_IMAGES = [
-  pexels(1571468, 900),
-  pexels(1128318, 900),
-  pexels(271624, 900),
-  pexels(1579715, 900),
-  pexels(17742, 900),
-  pexels(1571463, 900),
-  pexels(584399, 900),
-  pexels(1451903, 900),
-  pexels(265763, 900),
-  pexels(1444442, 900),
-  pexels(1024993, 900),
-  pexels(3778558, 900),
-  pexels(1648387, 900),
-  pexels(3556686, 900),
-  pexels(2253875, 900),
-  pexels(2673996, 900),
-  pexels(256490, 900),
-  pexels(3992946, 900),
-  pexels(3181718, 900),
-  pexels(1571460, 900),
-  pexels(1080721, 900),
-  pexels(1571465, 900),
-  pexels(1913472, 900),
+const FRAME_ONLY_IDS = [
+  1571468, 1128318, 1579715, 271624, 1571463, 584399, 1571465, 1913472, 1080721, 1571460,
+  3181718, 3992946, 769775, 1090638, 1830976, 2824194, 2955955, 406014, 1579219, 1128316,
+  276724, 1570119, 1571459, 1648120, 1571462,
 ];
+const FRAME_IMAGES = FRAME_ONLY_IDS.map((id) => pexels(id, 900));
 
 const makeProduct = ({
   id,

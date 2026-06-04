@@ -1,37 +1,16 @@
-/** Reliable CDN URLs (Pexels) — frame, wedding, family, home decor */
+import { framePexelsUrl, getFrameImageUrls, getFrameCardImage, FRAME_ONLY_PEXELS } from './frameImages';
+
+export { getFrameCardImage, getFrameImageUrls, framePexelsUrl, FRAME_ONLY_PEXELS };
+
+/** Reliable CDN URLs (Pexels) — frames & home decor */
 
 export function pexels(photoId: number, width = 800, height?: number): string {
   const h = height ? `&h=${height}` : '';
   return `https://images.pexels.com/photos/${photoId}/pexels-photo-${photoId}.jpeg?auto=compress&cs=tinysrgb&w=${width}${h}&fit=crop`;
 }
 
-/** Gallery-quality frame & lifestyle photos */
-export const FRAME_GALLERY = [
-  pexels(1571468, 900), // frames on wall
-  pexels(1128318, 900),
-  pexels(271624, 900),
-  pexels(1579715, 900),
-  pexels(17742, 900),
-  pexels(1571463, 900),
-  pexels(584399, 900),
-  pexels(1451903, 900), // couple
-  pexels(265763, 900), // wedding
-  pexels(1444442, 900),
-  pexels(1024993, 900), // family
-  pexels(3778558, 900),
-  pexels(3279203, 900),
-  pexels(1648387, 900), // baby
-  pexels(3556686, 900),
-  pexels(2253875, 900),
-  pexels(2673996, 900), // graduation
-  pexels(256490, 900),
-  pexels(3992946, 900),
-  pexels(3181718, 900),
-  pexels(1571460, 900),
-  pexels(1080721, 900),
-  pexels(1571465, 900),
-  pexels(1913472, 900),
-] as const;
+/** Frame-only gallery for product pages */
+export const FRAME_GALLERY = FRAME_ONLY_PEXELS.map((id) => pexels(id, 900));
 
 export const IMAGES = {
   hero: pexels(1128318, 1920, 1080),
@@ -134,11 +113,17 @@ export function getCategoryBanner(slug: string, bannerUrl?: string | null) {
 export function getProductImages(slug: string, images?: string[] | null) {
   const fromApi = images?.filter((u) => u && !u.includes('unsplash.com'));
   if (fromApi?.length) return fromApi;
-  return PRODUCT_IMAGES[slug] ?? [galleryImage(slug.length), galleryImage(slug.length + 3)];
+  return PRODUCT_IMAGES[slug] ?? getFrameImageUrls(slug, 3);
 }
 
+/** Full product page — prefer API seed images, else frame-only set */
 export function getProductImage(slug: string, images?: string[] | null) {
   return getProductImages(slug, images)[0];
+}
+
+/** Grid cards — always frame-only, smaller crop, unique per slug */
+export function getProductCardImage(slug: string, _images?: string[] | null) {
+  return getFrameCardImage(slug);
 }
 
 export function getDesignImage(name: string) {

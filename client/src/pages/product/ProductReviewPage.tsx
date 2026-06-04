@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
 import { useProductOrder } from '../../hooks/useProductOrder';
-import { ProductFlowLayout } from '../../components/product/flow/ProductFlowLayout';
 import { PhotoEditModal } from '../../components/product/flow/PhotoEditModal';
-import { PriceDisplay } from '../../components/product/flow/PriceDisplay';
-import { CreateNowButton } from '../../components/product/flow/CreateNowButton';
+import { PrintoUploadButton } from '../../components/product/printo/PrintoUploadButton';
 import { FramePreview } from '../../components/product/FramePreview';
-import { pageTransition } from '../../animations/variants';
+import { formatPrice } from '../../lib/utils';
 
 export function ProductReviewPage() {
   const navigate = useNavigate();
@@ -22,11 +19,10 @@ export function ProductReviewPage() {
     selectedSize,
     pricing,
     draft,
+    quantity,
   } = useProductOrder();
 
   const [editIndex, setEditIndex] = useState<number | null>(null);
-  const reviewed = photoUrls.length > 0 ? 1 : 0;
-  const reviewPercent = Math.min(60 + Math.round((reviewed / Math.max(photoUrls.length, 1)) * 35), 95);
 
   const goCheckout = () => {
     navigate('/preview');
@@ -40,8 +36,8 @@ export function ProductReviewPage() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-[50vh] items-center justify-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-brand-maroon border-t-transparent" />
+      <div className="flex min-h-[50vh] items-center justify-center bg-white">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-violet-600 border-t-transparent" />
       </div>
     );
   }
@@ -51,29 +47,30 @@ export function ProductReviewPage() {
   }
 
   const orient = (orientation === 'Landscape' ? 'Landscape' : 'Portrait') as 'Portrait' | 'Landscape';
+  const total = pricing.unitPrice * quantity;
 
   return (
-    <motion.div variants={pageTransition} initial="initial" animate="animate">
-      <ProductFlowLayout step={3} percent={reviewPercent} title={product.name}>
-        <div className="py-5">
-          <p className="text-center text-xs font-semibold tracking-wide text-brand-charcoal-light">
-            ALERT — IMPORTANT
+    <div className="min-h-screen bg-white pb-24">
+      <div className="mx-auto max-w-lg">
+        <div className="border-b border-neutral-200 px-4 py-3">
+          <p className="text-xs text-brand-charcoal-light">
+            Step 3 of 3 — <span className="font-semibold text-brand-charcoal">Review & checkout</span>
           </p>
-          <p className="mt-2 text-center text-sm text-brand-charcoal-light">
-            Tap a photo to edit crop, rotate, or replace. Your print will match the preview.
+          <h1 className="mt-1 text-lg font-bold text-brand-charcoal">{product.name}</h1>
+        </div>
+
+        <div className="px-4 py-5">
+          <p className="text-center text-sm text-brand-charcoal-light">
+            Tap your photo to edit crop or rotation before we print.
           </p>
 
           <div className="mt-6 flex justify-center">
             <button
               type="button"
               onClick={() => setEditIndex(0)}
-              className="w-full max-w-xs overflow-hidden rounded-xl bg-brand-ivory-dark"
+              className="w-full max-w-xs overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50"
             >
-              <FramePreview
-                photoUrl={photoUrls[0]}
-                orientation={orient}
-                finish={finish}
-              />
+              <FramePreview photoUrl={photoUrls[0]} orientation={orient} finish={finish} />
             </button>
           </div>
 
@@ -84,7 +81,7 @@ export function ProductReviewPage() {
                   key={`${url}-${i}`}
                   type="button"
                   onClick={() => setEditIndex(i)}
-                  className="aspect-square overflow-hidden rounded-lg border-2 border-brand-ivory-dark hover:border-brand-maroon"
+                  className="aspect-square overflow-hidden rounded-lg border-2 border-neutral-200"
                 >
                   <img src={url} alt="" className="h-full w-full object-cover" />
                 </button>
@@ -92,43 +89,33 @@ export function ProductReviewPage() {
             </div>
           )}
 
-          <div className="mt-6">
-            <div className="h-1.5 overflow-hidden rounded-full bg-brand-ivory-dark">
-              <div
-                className="h-full rounded-full bg-brand-maroon transition-all"
-                style={{ width: `${reviewPercent}%` }}
-              />
-            </div>
-            <p className="mt-2 text-center text-xs text-brand-charcoal-light">{reviewPercent}% complete</p>
-          </div>
-
-          <div className="mt-6 border-t border-brand-ivory-dark pt-5">
-            <p className="text-sm font-bold text-brand-charcoal">{draft.productName}</p>
+          <div className="mt-6 space-y-2 border-t border-neutral-200 pt-4 text-sm">
+            <p className="font-semibold text-brand-charcoal">{draft.productName}</p>
             {selectedSize && (
               <p className="text-xs text-brand-charcoal-light">
                 {selectedSize.inches} · {finish} · {orientation}
               </p>
             )}
-            <PriceDisplay
-              unitPrice={pricing.unitPrice}
-              mrp={pricing.mrp}
-              discount={pricing.discount}
-              compact
-            />
+            <div className="flex justify-between font-bold pt-2">
+              <span>Total</span>
+              <span className="text-orange-600">{formatPrice(total)}</span>
+            </div>
           </div>
 
-          <div className="mt-6 space-y-3">
-            <CreateNowButton label="CONTINUE TO CHECKOUT" onClick={goCheckout} />
-            <button
-              type="button"
-              onClick={() => navigate(`/product/${slug}/upload`)}
-              className="w-full text-center text-sm text-brand-maroon"
-            >
-              Back to upload
-            </button>
-          </div>
+          <Link
+            to={`/product/${slug}/upload`}
+            className="mt-4 block text-center text-sm font-medium text-violet-700 hover:underline"
+          >
+            Back to upload
+          </Link>
         </div>
-      </ProductFlowLayout>
+      </div>
+
+      <div className="fixed bottom-0 left-0 right-0 z-30 border-t bg-white/95 p-3 backdrop-blur">
+        <div className="mx-auto max-w-lg">
+          <PrintoUploadButton label="Continue to checkout" onClick={goCheckout} />
+        </div>
+      </div>
 
       {editIndex !== null && photoUrls[editIndex] && (
         <PhotoEditModal
@@ -140,6 +127,6 @@ export function ProductReviewPage() {
           }}
         />
       )}
-    </motion.div>
+    </div>
   );
 }

@@ -6,10 +6,11 @@ const fs = require('fs');
 const path = require('path');
 const { CATALOG, CATEGORY_LIST } = require('../server/src/data/productCatalog');
 
+/** Picture frames & gallery walls only — each product gets a different design */
 const PEXELS = [
-  1571468, 1128318, 271624, 1579715, 17742, 1571463, 584399, 1451903, 265763, 1444442,
-  1024993, 3778558, 1648387, 3556686, 2253875, 2673996, 256490, 3992946, 3181718, 1571460,
-  1080721, 1571465, 1913472,
+  1571468, 1128318, 1579715, 271624, 1571463, 584399, 1571465, 1913472, 1080721, 1571460,
+  3181718, 3992946, 769775, 1090638, 1830976, 2824194, 2955955, 406014, 1579219, 1128316,
+  276724, 1570119, 1571459, 1648120, 1571462,
 ];
 
 const CATEGORY_META = Object.fromEntries(
