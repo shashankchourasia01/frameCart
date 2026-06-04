@@ -2,6 +2,7 @@ const express = require('express');
 const { authMiddleware } = require('../middleware/authMiddleware');
 const { supabase } = require('../lib/supabase');
 const mock = require('../data/mock');
+const mockOrders = require('../lib/mockOrderStore');
 const adminProductsRouter = require('./adminProducts');
 
 const router = express.Router();
@@ -34,7 +35,14 @@ router.get('/orders', async (req, res, next) => {
       if (error) throw error;
       return res.json(data);
     }
-    res.json([]);
+    const search = req.query.search;
+    const status = req.query.status;
+    return res.json(
+      mockOrders.list({
+        status: status || undefined,
+        search: typeof search === 'string' ? search : undefined,
+      })
+    );
   } catch (e) {
     next(e);
   }

@@ -44,11 +44,12 @@ export function AdminOrdersPage() {
           ))}
         </div>
         <div className="overflow-x-auto rounded-xl border bg-white">
-          <table className="w-full min-w-[800px] text-left text-sm">
+          <table className="w-full min-w-[960px] text-left text-sm">
             <thead className="border-b bg-gray-50">
               <tr>
                 <th className="p-3">Order #</th>
                 <th className="p-3">Customer</th>
+                <th className="p-3">Delivery</th>
                 <th className="p-3">Product</th>
                 <th className="p-3">Amount</th>
                 <th className="p-3">Status</th>
@@ -57,12 +58,26 @@ export function AdminOrdersPage() {
             </thead>
             <tbody>
               {isLoading ? (
-                <tr><td colSpan={6} className="p-8 text-center">Loading...</td></tr>
+                <tr><td colSpan={7} className="p-8 text-center">Loading...</td></tr>
               ) : (
                 (orders ?? []).map((o) => (
                   <tr key={o.id} className="border-b">
                     <td className="p-3 font-mono text-xs">{o.order_number}</td>
-                    <td className="p-3">{o.customer_phone ?? '—'}</td>
+                    <td className="p-3">
+                      <p className="font-medium">{o.customer_name ?? '—'}</p>
+                      <p className="text-xs text-brand-charcoal-light">{o.customer_phone ?? ''}</p>
+                    </td>
+                    <td className="p-3 text-xs text-brand-charcoal-light max-w-[180px]">
+                      {o.customer_address ? (
+                        <>
+                          {o.customer_address}
+                          <br />
+                          {[o.customer_city, o.customer_state, o.customer_pincode].filter(Boolean).join(', ')}
+                        </>
+                      ) : (
+                        o.customer_city ?? '—'
+                      )}
+                    </td>
                     <td className="p-3">{o.product_name}</td>
                     <td className="p-3">{formatPrice(Number(o.total_price))}</td>
                     <td className="p-3">

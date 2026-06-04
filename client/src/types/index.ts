@@ -81,7 +81,10 @@ export interface Order {
   customer_name?: string;
   customer_phone?: string;
   customer_email?: string;
+  customer_address?: string;
   customer_city?: string;
+  customer_state?: string;
+  customer_pincode?: string;
   special_instructions?: string;
   dynamic_field_values?: Record<string, string> | null;
   uploaded_photo_urls: string[];
@@ -128,6 +131,14 @@ export interface OrderDetails {
   dynamicFields?: Record<string, string>;
   photoUrls: string[];
   previewUrl?: string;
+  orderNumber?: string;
+  customerName?: string;
+  customerPhone?: string;
+  customerEmail?: string;
+  customerAddress?: string;
+  customerCity?: string;
+  customerState?: string;
+  customerPincode?: string;
 }
 
 export interface CartItem {
