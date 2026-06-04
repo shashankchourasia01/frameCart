@@ -6,7 +6,7 @@ import { ProductCardSkeleton } from '../product/ProductCardSkeleton';
 import { staggerContainer, fadeUp } from '../../animations/variants';
 import { HiArrowRight } from '../icons';
 
-const BESTSELLER_LIMIT = 50;
+const BESTSELLER_LIMIT = 8;
 
 export function BestsellerGrid() {
   const { data: products, isLoading } = useProducts({ bestseller: true, limit: BESTSELLER_LIMIT });
@@ -35,7 +35,7 @@ export function BestsellerGrid() {
             </motion.p>
           </div>
           <Link
-            to="/category/wedding"
+            to="/shop"
             className="shrink-0 text-sm font-semibold text-brand-maroon transition hover:text-brand-maroon-dark"
           >
             <span className="inline-flex items-center gap-1">
@@ -50,16 +50,24 @@ export function BestsellerGrid() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+          className="mt-10 -mx-4 flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide snap-x snap-mandatory sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-4 lg:gap-4"
         >
           {isLoading
-            ? Array.from({ length: 12 }).map((_, i) => (
-                <motion.div key={i} variants={fadeUp}>
+            ? Array.from({ length: 8 }).map((_, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  className="w-[min(72vw,13.5rem)] shrink-0 snap-start sm:w-auto"
+                >
                   <ProductCardSkeleton />
                 </motion.div>
               ))
             : (products ?? []).map((p) => (
-                <motion.div key={p.id} variants={fadeUp}>
+                <motion.div
+                  key={p.id}
+                  variants={fadeUp}
+                  className="w-[min(72vw,13.5rem)] shrink-0 snap-start sm:w-auto"
+                >
                   <ProductCard product={p} />
                 </motion.div>
               ))}

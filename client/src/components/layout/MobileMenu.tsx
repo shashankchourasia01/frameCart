@@ -20,7 +20,7 @@ interface MobileMenuProps {
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/category/wedding', label: 'Frames' },
+  { to: '/shop', label: 'Shop' },
   { to: '/offers', label: 'Offers' },
   { to: '/#about', label: 'About' },
 ];

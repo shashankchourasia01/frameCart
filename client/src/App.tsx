@@ -15,6 +15,7 @@ import { AdminGuard } from './components/admin/AdminGuard';
 import { pageTransition } from './animations/variants';
 
 const HomePage = lazy(() => import('./pages/HomePage').then((m) => ({ default: m.HomePage })));
+const ShopPage = lazy(() => import('./pages/ShopPage').then((m) => ({ default: m.ShopPage })));
 const CategoryPage = lazy(() => import('./pages/CategoryPage').then((m) => ({ default: m.CategoryPage })));
 const ProductDetailPage = lazy(() =>
   import('./pages/ProductDetailPage').then((m) => ({ default: m.ProductDetailPage }))
@@ -88,6 +89,7 @@ function AnimatedRoutes() {
         <Suspense fallback={<Loading />}>
           <Routes location={location}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/shop" element={<ShopPage />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
             <Route path="/product/:slug" element={<ProductDetailPage />} />
             <Route path="/product/:slug/upload" element={<ProductUploadPage />} />

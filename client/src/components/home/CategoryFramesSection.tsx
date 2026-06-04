@@ -7,7 +7,8 @@ import { ProductCardSkeleton } from '../product/ProductCardSkeleton';
 import { CategoryIcon, HiArrowRight } from '../icons';
 import { fadeUp, staggerContainer } from '../../animations/variants';
 
-const FRAMES_PER_CATEGORY = 5;
+const FRAMES_PER_CATEGORY = 3;
+const FEATURED_CATEGORY_SLUGS = ['wedding', 'anniversary', 'couple'] as const;
 
 function CategoryRow({ slug, name }: { slug: string; name: string }) {
   const { data: products, isLoading } = useProducts({ category: slug, limit: FRAMES_PER_CATEGORY });
@@ -99,13 +100,15 @@ export function CategoryFramesSection() {
         <div className="mx-auto max-w-7xl text-center">
           <h2 className="section-title">Frames for Every Occasion</h2>
           <p className="section-subtitle mx-auto mt-2">
-            Browse curated collections — swipe through 5 designs per category
+            A quick preview — visit the shop for all categories and frames
           </p>
         </div>
       </div>
-      {(categories ?? []).map((cat) => (
-        <CategoryRow key={cat.id} slug={cat.slug} name={cat.name} />
-      ))}
+      {(categories ?? [])
+        .filter((cat) => FEATURED_CATEGORY_SLUGS.includes(cat.slug as (typeof FEATURED_CATEGORY_SLUGS)[number]))
+        .map((cat) => (
+          <CategoryRow key={cat.id} slug={cat.slug} name={cat.name} />
+        ))}
     </div>
   );
 }

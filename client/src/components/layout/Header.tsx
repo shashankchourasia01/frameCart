@@ -9,7 +9,7 @@ import { openWhatsApp } from '../../lib/whatsapp';
 
 const navLinks = [
   { to: '/', label: 'Home' },
-  { to: '/category/wedding', label: 'Frames' },
+  { to: '/shop', label: 'Shop' },
   { to: '/offers', label: 'Offers' },
   { to: '/#about', label: 'About' },
 ];
@@ -79,10 +79,14 @@ export function Header() {
                 className={cn(
                   'rounded-full px-4 py-2 text-sm font-medium transition',
                   transparent
-                    ? location.pathname === link.to
+                    ? location.pathname === link.to ||
+                        (link.to === '/shop' &&
+                          (location.pathname === '/shop' || location.pathname.startsWith('/category')))
                       ? 'bg-white/15 text-white'
                       : 'text-white/80 hover:bg-white/10 hover:text-white'
-                    : location.pathname === link.to
+                    : location.pathname === link.to ||
+                        (link.to === '/shop' &&
+                          (location.pathname === '/shop' || location.pathname.startsWith('/category')))
                       ? 'bg-brand-maroon-light text-brand-maroon'
                       : 'text-brand-charcoal hover:bg-brand-ivory-dark'
                 )}

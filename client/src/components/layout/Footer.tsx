@@ -34,7 +34,7 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/category/wedding" className="transition hover:text-white">
+              <Link to="/shop" className="transition hover:text-white">
                 Shop Frames
               </Link>
             </li>

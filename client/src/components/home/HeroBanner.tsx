@@ -51,7 +51,7 @@ export function HeroBanner() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-4">
-            <Link to="/category/wedding" className="btn-primary">
+            <Link to="/shop" className="btn-primary">
               Shop Frames
             </Link>
             <Link to="/#about" className="btn-outline border-white/30 text-white hover:border-white hover:bg-white/10">
