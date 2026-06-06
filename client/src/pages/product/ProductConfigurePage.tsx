@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { useProductOrder } from '../../hooks/useProductOrder';
 import { buildOrderPayload } from '../../lib/buildOrderPayload';
 import { addRecentlyViewed } from '../../lib/recentlyViewed';
+import { productFlowOuter, productFlowPad, productFlowStickyInner } from '../../lib/productFlowLayout';
 import { PrintoProductGallery } from '../../components/product/printo/PrintoProductGallery';
 import { PrintoOptionRow } from '../../components/product/printo/PrintoOptionRow';
 import { PrintoPriceSummary } from '../../components/product/printo/PrintoPriceSummary';
@@ -13,6 +14,8 @@ import { FrameSizeGuide } from '../../components/product/printo/FrameSizeGuide';
 import { ProductDetailSections } from '../../components/product/printo/ProductDetailSections';
 import { ProductRecommendations } from '../../components/product/printo/ProductRecommendations';
 import { DynamicFields } from '../../components/product/DynamicFields';
+import { cn } from '../../lib/utils';
+
 export function ProductConfigurePage() {
   const navigate = useNavigate();
   const {
@@ -97,10 +100,12 @@ export function ProductConfigurePage() {
   );
 
   return (
-    <div className="min-h-screen bg-white pb-24">
-      <div className="mx-auto max-w-lg">
-        {/* Breadcrumbs */}
-        <nav className="px-4 py-3 text-xs text-brand-charcoal-light" aria-label="Breadcrumb">
+    <div className="min-h-screen bg-white pb-24 lg:pb-8">
+      <div className={productFlowOuter}>
+        <nav
+          className={cn(productFlowPad, 'py-3 text-xs text-brand-charcoal-light lg:py-4 lg:text-sm')}
+          aria-label="Breadcrumb"
+        >
           <Link to="/" className="hover:text-violet-700">
             Home
           </Link>
@@ -112,93 +117,101 @@ export function ProductConfigurePage() {
           <span className="text-brand-charcoal">{product.name}</span>
         </nav>
 
-        <PrintoProductGallery
-          images={product.images}
-          productSlug={product.slug}
-          designPreviewUrl={selectedDesign?.preview_url}
-          sizeLabels={sizeLabels}
-        />
-
-        <div className="px-4 py-4">
-          <div className="flex items-start justify-between gap-2">
-            <h1 className="text-xl font-bold text-brand-charcoal">{product.name}</h1>
-          </div>
-          {product.tagline && (
-            <p className="mt-2 text-sm leading-relaxed text-brand-charcoal-light">{product.tagline}</p>
-          )}
-
-          <div className="mt-4 border-t border-neutral-100">
-            {designs.length > 0 && (
-              <PrintoOptionRow
-                label="Frame style"
-                value={selectedDesign?.id ?? designs[0].id}
-                options={designOptions}
-                onChange={(id) => updateDraft({ selectedDesignId: id })}
-              />
-            )}
-            {sizes.length > 0 && (
-              <PrintoOptionRow
-                label="Sizes"
-                value={selectedSize?.inches ?? sizes[0].inches}
-                options={sizeOptions}
-                onChange={(inches) => updateDraft({ selectedSize: inches })}
-              />
-            )}
-            {orientationOptions.length > 0 && (
-              <PrintoOptionRow
-                label="Orientation"
-                value={orientation}
-                options={orientationOptions}
-                onChange={(v) => updateDraft({ orientation: v })}
-              />
-            )}
-            {finishOptions.length > 0 && (
-              <PrintoOptionRow
-                label="Print finish"
-                value={finish}
-                options={finishOptions}
-                onChange={(v) => updateDraft({ selectedFinish: v })}
-              />
-            )}
+        <div className={cn(productFlowPad, 'lg:grid lg:grid-cols-2 lg:items-start lg:gap-10 xl:gap-14')}>
+          <div className="lg:sticky lg:top-20">
+            <PrintoProductGallery
+              images={product.images}
+              productSlug={product.slug}
+              designPreviewUrl={selectedDesign?.preview_url}
+              sizeLabels={sizeLabels}
+            />
           </div>
 
-          <PrintoPriceSummary
-            unitPrice={pricing.unitPrice}
-            quantity={quantity}
-            onQuantityChange={(q) => updateDraft({ quantity: q })}
-          />
+          <div className="py-4 lg:py-0">
+            <h1 className="text-xl font-bold text-brand-charcoal lg:text-2xl xl:text-3xl">{product.name}</h1>
+            {product.tagline && (
+              <p className="mt-2 text-sm leading-relaxed text-brand-charcoal-light lg:text-base">
+                {product.tagline}
+              </p>
+            )}
 
-          {product.requires_dynamic_fields && product.dynamic_field_config?.fields && (
-            <div className="mt-4 border-t border-neutral-200 pt-4">
-              <DynamicFields
-                fields={product.dynamic_field_config.fields}
-                values={dynamicFields}
-                onChange={(v) => updateDraft({ dynamicFields: v })}
-              />
+            <div className="mt-4 border-t border-neutral-100 lg:mt-6">
+              {designs.length > 0 && (
+                <PrintoOptionRow
+                  label="Frame style"
+                  value={selectedDesign?.id ?? designs[0].id}
+                  options={designOptions}
+                  onChange={(id) => updateDraft({ selectedDesignId: id })}
+                />
+              )}
+              {sizes.length > 0 && (
+                <PrintoOptionRow
+                  label="Sizes"
+                  value={selectedSize?.inches ?? sizes[0].inches}
+                  options={sizeOptions}
+                  onChange={(inches) => updateDraft({ selectedSize: inches })}
+                />
+              )}
+              {orientationOptions.length > 0 && (
+                <PrintoOptionRow
+                  label="Orientation"
+                  value={orientation}
+                  options={orientationOptions}
+                  onChange={(v) => updateDraft({ orientation: v })}
+                />
+              )}
+              {finishOptions.length > 0 && (
+                <PrintoOptionRow
+                  label="Print finish"
+                  value={finish}
+                  options={finishOptions}
+                  onChange={(v) => updateDraft({ selectedFinish: v })}
+                />
+              )}
             </div>
-          )}
 
-          <div className="mt-6">
-            <PrintoUploadButton onClick={goUpload} />
+            <PrintoPriceSummary
+              unitPrice={pricing.unitPrice}
+              quantity={quantity}
+              onQuantityChange={(q) => updateDraft({ quantity: q })}
+            />
+
+            {product.requires_dynamic_fields && product.dynamic_field_config?.fields && (
+              <div className="mt-4 border-t border-neutral-200 pt-4">
+                <DynamicFields
+                  fields={product.dynamic_field_config.fields}
+                  values={dynamicFields}
+                  onChange={(v) => updateDraft({ dynamicFields: v })}
+                />
+              </div>
+            )}
+
+            <div className="mt-6 hidden lg:block">
+              <PrintoUploadButton onClick={goUpload} />
+            </div>
+
+            <div className="mt-6 lg:mt-8">
+              <DeliveryPincode />
+              <FrameSizeGuide />
+            </div>
           </div>
+        </div>
 
-          <DeliveryPincode />
-          <FrameSizeGuide />
-
+        <div className={cn(productFlowPad, 'pb-8')}>
           <ProductDetailSections
             description={product.description}
             materialInfo={product.material_info}
             sizes={sizeLabels}
             categoryName={categoryName}
           />
-
           <ProductRecommendations categorySlug={categorySlug} currentSlug={product.slug} />
         </div>
       </div>
 
-      {/* Sticky upload bar on mobile */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-neutral-200 bg-white/95 p-3 backdrop-blur md:bottom-0 lg:max-w-lg lg:left-1/2 lg:-translate-x-1/2">
-        <PrintoUploadButton onClick={goUpload} />
+      <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-neutral-200 bg-white/95 p-3 backdrop-blur lg:hidden">
+        <div className={productFlowStickyInner}>
+          <PrintoUploadButton onClick={goUpload} />
+        </div>
       </div>
     </div>
   );

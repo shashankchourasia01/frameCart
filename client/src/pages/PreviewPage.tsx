@@ -17,6 +17,8 @@ import {
 } from '../lib/customerDetails';
 import { pageTransition } from '../animations/variants';
 import { WhatsAppIcon } from '../components/icons';
+import { productFlowOuter, productFlowPad } from '../lib/productFlowLayout';
+import { cn } from '../lib/utils';
 import toast from 'react-hot-toast';
 
 export function PreviewPage() {
@@ -150,54 +152,62 @@ export function PreviewPage() {
       variants={pageTransition}
       initial="initial"
       animate="animate"
-      className="mx-auto max-w-lg px-4 py-8 pb-28"
+      className={cn(productFlowOuter, productFlowPad, 'py-8 pb-12 lg:pb-16')}
     >
-      <h1 className="text-center text-lg font-bold text-brand-charcoal">Checkout</h1>
-      <p className="mt-2 text-center text-sm text-brand-charcoal-light">
+      <h1 className="text-center text-lg font-bold text-brand-charcoal lg:text-2xl">Checkout</h1>
+      <p className="mt-2 text-center text-sm text-brand-charcoal-light lg:text-base">
         Review your frame and enter delivery details
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-xl bg-brand-ivory-dark">
-        <FramePreview photoUrl={draft.photoUrls?.[0]} orientation={orientation} finish={finish} />
-      </div>
-      <div className="mt-4 flex flex-wrap justify-center gap-2">
-        {draft.selectedSize && (
-          <span className="rounded-full bg-brand-ivory-dark px-3 py-1 text-xs">{draft.selectedSize}</span>
-        )}
-        {draft.selectedFinish && (
-          <span className="rounded-full bg-brand-ivory-dark px-3 py-1 text-xs">{draft.selectedFinish}</span>
-        )}
-        {draft.orientation && (
-          <span className="rounded-full bg-brand-ivory-dark px-3 py-1 text-xs">{draft.orientation}</span>
-        )}
-      </div>
-      <div className="mt-4 text-center">
-        <p className="text-sm font-semibold text-brand-charcoal">{draft.productName}</p>
-        <PriceDisplay unitPrice={pricing.unitPrice} mrp={pricing.mrp} discount={pricing.discount} />
-      </div>
+      <div className="mt-8 lg:grid lg:grid-cols-2 lg:items-start lg:gap-10 xl:gap-14">
+        <div>
+          <div className="overflow-hidden rounded-xl bg-brand-ivory-dark lg:rounded-2xl">
+            <FramePreview photoUrl={draft.photoUrls?.[0]} orientation={orientation} finish={finish} />
+          </div>
+          <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
+            {draft.selectedSize && (
+              <span className="rounded-full bg-brand-ivory-dark px-3 py-1 text-xs">{draft.selectedSize}</span>
+            )}
+            {draft.selectedFinish && (
+              <span className="rounded-full bg-brand-ivory-dark px-3 py-1 text-xs">{draft.selectedFinish}</span>
+            )}
+            {draft.orientation && (
+              <span className="rounded-full bg-brand-ivory-dark px-3 py-1 text-xs">{draft.orientation}</span>
+            )}
+          </div>
+          <div className="mt-4 text-center lg:text-left">
+            <p className="text-sm font-semibold text-brand-charcoal lg:text-base">{draft.productName}</p>
+            <PriceDisplay unitPrice={pricing.unitPrice} mrp={pricing.mrp} discount={pricing.discount} />
+          </div>
+        </div>
 
-      <div className="mt-6">
-        <CustomerDetailsForm value={customer} onChange={handleCustomerChange} errors={fieldErrors} />
-      </div>
+        <div className="mt-8 lg:mt-0">
+          <CustomerDetailsForm value={customer} onChange={handleCustomerChange} errors={fieldErrors} />
 
-      <div className="mt-6">
-        <CreateNowButton
-          label={submitting ? 'PLACING ORDER…' : 'PLACE ORDER ON WHATSAPP'}
-          disabled={submitting}
-          onClick={() => void confirm()}
-        />
-        <p className="mt-2 flex items-center justify-center gap-1.5 text-center text-xs text-brand-charcoal-light">
-          <WhatsAppIcon size="sm" className="text-brand-whatsapp" />
-          Order details are sent to FrameCraft on WhatsApp
-        </p>
-      </div>
+          <div className="mt-6">
+            <CreateNowButton
+              label={submitting ? 'PLACING ORDER…' : 'PLACE ORDER ON WHATSAPP'}
+              disabled={submitting}
+              onClick={() => void confirm()}
+            />
+            <p className="mt-2 flex items-center justify-center gap-1.5 text-center text-xs text-brand-charcoal-light lg:justify-start">
+              <WhatsAppIcon size="sm" className="text-brand-whatsapp" />
+              Order details are sent to FrameCraft on WhatsApp
+            </p>
+          </div>
 
-      <Link to={editPath} className="mt-4 block text-center text-sm text-brand-maroon">
-        Go back & edit
-      </Link>
-      <button type="button" onClick={() => void share()} className="mt-2 w-full text-sm text-brand-charcoal-light">
-        Share preview
-      </button>
+          <Link to={editPath} className="mt-4 block text-center text-sm text-brand-maroon lg:text-left">
+            Go back & edit
+          </Link>
+          <button
+            type="button"
+            onClick={() => void share()}
+            className="mt-2 w-full text-sm text-brand-charcoal-light lg:w-auto"
+          >
+            Share preview
+          </button>
+        </div>
+      </div>
     </motion.div>
   );
 }
