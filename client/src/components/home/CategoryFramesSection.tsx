@@ -40,13 +40,6 @@ function SectionIntro() {
               Turn your memories into premium wall decor — browse wedding, family, baby, festival
               and more collections below.
             </p>
-            <Link
-              to="/shop"
-              className="mt-5 inline-flex items-center gap-2 rounded-btn bg-brand-maroon px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-maroon-dark"
-            >
-              Browse all categories
-              <HiArrowRight className="h-4 w-4" />
-            </Link>
           </div>
 
           <div className="grid grid-cols-3 gap-2 sm:gap-3 lg:min-w-[15rem] lg:grid-cols-1">

@@ -1,5 +1,4 @@
 import { HeroBanner } from '../components/home/HeroBanner';
-import { TrustBar } from '../components/home/TrustBar';
 import { HomeShopBanner } from '../components/home/HomeShopBanner';
 import { CategoryFramesSection } from '../components/home/CategoryFramesSection';
 import { BestsellerGrid } from '../components/home/BestsellerGrid';
@@ -12,10 +11,9 @@ export function HomePage() {
   return (
     <>
       <HeroBanner />
-      <TrustBar />
-      <HomeShopBanner />
       <CategoryFramesSection />
       <BestsellerGrid />
+      <HomeShopBanner />
       <FeaturedOffer />
       <Testimonials />
       <HomeFaqSection />
