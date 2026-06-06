@@ -9,7 +9,7 @@ export function HomeShopBanner() {
         <div>
           <p className="text-sm font-semibold text-brand-charcoal">Browse all occasions</p>
           <p className="mt-0.5 text-xs text-brand-charcoal-light">
-            10 categories · 5 frame types each — tap a circle on the shop page
+            9 categories · 50+ frame designs — tap a circle on the shop page
           </p>
         </div>
         <Link

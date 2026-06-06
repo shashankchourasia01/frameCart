@@ -1,7 +1,6 @@
 import type { ComponentProps } from 'react';
 import type { IconType } from 'react-icons';
 import {
-  HiAcademicCap,
   HiArchiveBox,
   HiArrowRight,
   HiArrowUpTray,
@@ -95,16 +94,15 @@ export function WhatsAppIcon(props: Omit<AppIconProps, 'icon'>) {
 }
 
 const CATEGORY_ICON_MAP: Record<string, IconType> = {
-  wedding: HiHeart,
-  anniversary: HiSparkles,
-  baby: HiUser,
-  family: HiUserGroup,
-  couple: HiHeart,
-  graduation: HiAcademicCap,
-  birthday: HiGift,
-  friendship: HiUserGroup,
-  housewarming: HiHome,
+  'family-relationship': HiUserGroup,
+  'baby-kids': HiUser,
+  'birthday-celebration': HiGift,
+  'wedding-collection': HiHeart,
   festival: HiSparkles,
+  memorial: HiPhoto,
+  'travel-lifestyle': HiHome,
+  personalized: HiSparkles,
+  trending: HiSparkles,
 };
 
 export function CategoryIcon({

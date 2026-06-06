@@ -1,5 +1,5 @@
 /**
- * Load full catalog (10 categories, 50 products, 2 offers) into Supabase.
+ * Load full catalog (9 categories, 50 products, 2 offers) into Supabase.
  * Run: node scripts/seed-supabase.js  (from server/, uses server/.env)
  */
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
@@ -96,7 +96,7 @@ async function main() {
       },
       max_photos: 2,
     })
-    .eq('slug', 'love-story-frame');
+    .eq('slug', 'love-story-photo-frame');
   if (dynErr) throw dynErr;
 
   const valid90 = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString();

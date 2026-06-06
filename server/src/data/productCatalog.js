@@ -1,88 +1,166 @@
-/** 10 categories × 5 frame types each = 50 products */
+/** Client catalog — 9 categories, 50 frame types */
 
 const CATEGORY_LIST = [
-  { id: '1', slug: 'wedding', name: 'Wedding', emoji: '💒', description: 'Celebrate your special day', thumb: 265763, banner: 265763 },
-  { id: '2', slug: 'anniversary', name: 'Anniversary', emoji: '💑', description: 'Mark every year together', thumb: 1444442, banner: 1444442 },
-  { id: '3', slug: 'baby', name: 'Baby', emoji: '👶', description: 'Welcome the little one', thumb: 1648387, banner: 3556686 },
-  { id: '4', slug: 'family', name: 'Family', emoji: '👨‍👩‍👧', description: 'Cherish family moments', thumb: 1024993, banner: 3778558 },
-  { id: '5', slug: 'couple', name: 'Couple', emoji: '❤️', description: 'Romantic frames for two', thumb: 1451903, banner: 2253875 },
-  { id: '6', slug: 'graduation', name: 'Graduation', emoji: '🎓', description: 'Proud achievements', thumb: 2673996, banner: 256490 },
-  { id: '7', slug: 'birthday', name: 'Birthday', emoji: '🎂', description: 'Celebrate every year', thumb: 3181718, banner: 1128318 },
-  { id: '8', slug: 'friendship', name: 'Friendship', emoji: '🤝', description: 'Friends forever', thumb: 17742, banner: 3992946 },
-  { id: '9', slug: 'housewarming', name: 'Housewarming', emoji: '🏠', description: 'New home memories', thumb: 1571460, banner: 584399 },
-  { id: '10', slug: 'festival', name: 'Festival', emoji: '🪔', description: 'Festive celebrations', thumb: 1080721, banner: 1571468 },
+  {
+    id: '1',
+    slug: 'family-relationship',
+    name: 'Family & Relationship Frames',
+    emoji: '👨‍👩‍👧',
+    description: 'Celebrate love, family and togetherness',
+    thumb: 1024993,
+    banner: 3778558,
+  },
+  {
+    id: '2',
+    slug: 'baby-kids',
+    name: 'Baby & Kids Frames',
+    emoji: '👶',
+    description: 'Precious moments from newborn to school days',
+    thumb: 1648387,
+    banner: 3556686,
+  },
+  {
+    id: '3',
+    slug: 'birthday-celebration',
+    name: 'Birthday & Celebration Frames',
+    emoji: '🎂',
+    description: 'Mark every birthday and milestone celebration',
+    thumb: 3181718,
+    banner: 1128318,
+  },
+  {
+    id: '4',
+    slug: 'wedding-collection',
+    name: 'Wedding Collection',
+    emoji: '💒',
+    description: 'Every ceremony from haldi to reception',
+    thumb: 265763,
+    banner: 265763,
+  },
+  {
+    id: '5',
+    slug: 'festival',
+    name: 'Festival Frames',
+    emoji: '🪔',
+    description: 'Festive memories for every occasion',
+    thumb: 1080721,
+    banner: 1571468,
+  },
+  {
+    id: '6',
+    slug: 'memorial',
+    name: 'Memorial Frames',
+    emoji: '🕯️',
+    description: 'Honour and remember loved ones',
+    thumb: 1571463,
+    banner: 271624,
+  },
+  {
+    id: '7',
+    slug: 'travel-lifestyle',
+    name: 'Travel & Lifestyle Frames',
+    emoji: '✈️',
+    description: 'Adventures, vacations and nature moments',
+    thumb: 1571460,
+    banner: 584399,
+  },
+  {
+    id: '8',
+    slug: 'personalized',
+    name: 'Personalized Frames',
+    emoji: '✨',
+    description: 'Custom collages, names and creative styles',
+    thumb: 3992946,
+    banner: 2824194,
+  },
+  {
+    id: '9',
+    slug: 'trending',
+    name: 'Trending Categories',
+    emoji: '🔥',
+    description: 'Popular acrylic and LED frame styles',
+    thumb: 1128318,
+    banner: 1579715,
+  },
 ];
 
+function cat(id, slug, name) {
+  const c = CATEGORY_LIST.find((x) => x.id === id);
+  return {
+    category_id: id,
+    categorySlug: slug,
+    categoryName: c?.name ?? name,
+  };
+}
+
 const CATALOG = [
-  // Wedding (5)
-  { category_id: '1', categorySlug: 'wedding', categoryName: 'Wedding', name: 'Love Story Frame', slug: 'love-story-frame', tagline: 'Your journey, beautifully framed', price: 899, is_featured: true },
-  { category_id: '1', categorySlug: 'wedding', categoryName: 'Wedding', name: 'Royal Wedding Collage', slug: 'royal-wedding-collage', tagline: 'Multiple moments in one frame', price: 999 },
-  { category_id: '1', categorySlug: 'wedding', categoryName: 'Wedding', name: 'Wedding Date Keepsake', slug: 'wedding-date-keepsake', tagline: 'Remember your special date forever', price: 849 },
-  { category_id: '1', categorySlug: 'wedding', categoryName: 'Wedding', name: 'Eternal Vows Frame', slug: 'eternal-vows-frame', tagline: 'Classic wedding portrait display', price: 929 },
-  { category_id: '1', categorySlug: 'wedding', categoryName: 'Wedding', name: 'Bridal Portrait Frame', slug: 'bridal-portrait-frame', tagline: 'Elegant bride showcase', price: 949 },
+  // Family & Relationship Frames (11)
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Anniversary Photo Frame', slug: 'anniversary-photo-frame', tagline: 'Celebrate every year together', price: 849 },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Wedding Photo Frame', slug: 'wedding-photo-frame', tagline: 'Classic wedding portrait display', price: 899 },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Pre-Wedding Photo Frame', slug: 'pre-wedding-photo-frame', tagline: 'Before the big day memories', price: 879 },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Engagement Photo Frame', slug: 'engagement-photo-frame', tagline: 'She said yes — frame the moment', price: 919 },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Love Story Photo Frame', slug: 'love-story-photo-frame', tagline: 'Your journey, beautifully framed', price: 899, is_featured: true },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Couple Photo Frame', slug: 'couple-photo-frame', tagline: 'Romantic frames for two', price: 799 },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Family Photo Frame', slug: 'family-photo-frame', tagline: 'Together forever on your wall', price: 749 },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Parents Photo Frame', slug: 'parents-photo-frame', tagline: 'A tribute to mom and dad', price: 769 },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Grandparents Photo Frame', slug: 'grandparents-photo-frame', tagline: 'Generations of love', price: 779 },
+  { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Siblings Photo Frame', slug: 'siblings-photo-frame', tagline: 'Brother and sister memories', price: 759 },
 
-  // Anniversary (5)
-  { category_id: '2', categorySlug: 'anniversary', categoryName: 'Anniversary', name: 'Golden Anniversary Frame', slug: 'golden-anniversary-frame', tagline: 'Elegant gift for every year', price: 799 },
-  { category_id: '2', categorySlug: 'anniversary', categoryName: 'Anniversary', name: 'Anniversary Memory Wall', slug: 'anniversary-memory-wall', tagline: 'Timeline of your journey', price: 1099 },
-  { category_id: '2', categorySlug: 'anniversary', categoryName: 'Anniversary', name: 'Silver Years Frame', slug: 'silver-years-frame', tagline: 'Celebrate years of togetherness', price: 879 },
-  { category_id: '2', categorySlug: 'anniversary', categoryName: 'Anniversary', name: 'First Date Keepsake', slug: 'first-date-keepsake', tagline: 'Where it all began', price: 749 },
-  { category_id: '2', categorySlug: 'anniversary', categoryName: 'Anniversary', name: 'Together Forever Collage', slug: 'together-forever-collage', tagline: 'Your story in one frame', price: 959 },
+  // Baby & Kids Frames (7)
+  { ...cat('2', 'baby-kids', 'Baby & Kids Frames'), name: 'Newborn Baby Photo Frame', slug: 'newborn-baby-photo-frame', tagline: 'Welcome to the world', price: 799 },
+  { ...cat('2', 'baby-kids', 'Baby & Kids Frames'), name: 'Baby Monthly Milestone Frame', slug: 'baby-monthly-milestone-frame', tagline: 'Track every month of growth', price: 929 },
+  { ...cat('2', 'baby-kids', 'Baby & Kids Frames'), name: 'Baby First Year Frame', slug: 'baby-first-year-frame', tagline: 'From newborn to first birthday', price: 899 },
+  { ...cat('2', 'baby-kids', 'Baby & Kids Frames'), name: 'Birthday Photo Frame', slug: 'kids-birthday-photo-frame', tagline: 'Colourful kids birthday keepsake', price: 729 },
+  { ...cat('2', 'baby-kids', 'Baby & Kids Frames'), name: 'Kids Photo Frame', slug: 'kids-photo-frame', tagline: 'Playful designs for little ones', price: 699 },
+  { ...cat('2', 'baby-kids', 'Baby & Kids Frames'), name: 'School Memory Frame', slug: 'school-memory-frame', tagline: 'First day and school milestones', price: 749 },
+  { ...cat('2', 'baby-kids', 'Baby & Kids Frames'), name: 'Baby Naming Ceremony Frame', slug: 'baby-naming-ceremony-frame', tagline: 'Naamkaran celebration frame', price: 819 },
 
-  // Baby (5)
-  { category_id: '3', categorySlug: 'baby', categoryName: 'Baby', name: 'Baby First Year Frame', slug: 'baby-first-year-frame', tagline: 'From newborn to first birthday', price: 899 },
-  { category_id: '3', categorySlug: 'baby', categoryName: 'Baby', name: 'Baby Name Frame', slug: 'baby-name-frame', tagline: 'Personalized with baby name', price: 759 },
-  { category_id: '3', categorySlug: 'baby', categoryName: 'Baby', name: 'Little Star Frame', slug: 'little-star-frame', tagline: 'Sweet nursery wall art', price: 819 },
-  { category_id: '3', categorySlug: 'baby', categoryName: 'Baby', name: 'Newborn Welcome Frame', slug: 'newborn-welcome-frame', tagline: 'Hello world announcement', price: 799 },
-  { category_id: '3', categorySlug: 'baby', categoryName: 'Baby', name: 'Milestone Grid Frame', slug: 'milestone-grid-frame', tagline: 'Monthly growth photos', price: 929 },
+  // Birthday & Celebration Frames (6)
+  { ...cat('3', 'birthday-celebration', 'Birthday & Celebration Frames'), name: 'Birthday Photo Frame', slug: 'birthday-photo-frame', tagline: 'Classic birthday celebration', price: 749 },
+  { ...cat('3', 'birthday-celebration', 'Birthday & Celebration Frames'), name: 'First Birthday Frame', slug: 'first-birthday-frame', tagline: 'Turning one — a big milestone', price: 799 },
+  { ...cat('3', 'birthday-celebration', 'Birthday & Celebration Frames'), name: 'Sweet 16 Birthday Frame', slug: 'sweet-16-birthday-frame', tagline: 'Teen milestone keepsake', price: 819 },
+  { ...cat('3', 'birthday-celebration', 'Birthday & Celebration Frames'), name: 'Golden Jubilee Frame', slug: 'golden-jubilee-frame', tagline: '50 years of celebration', price: 949 },
+  { ...cat('3', 'birthday-celebration', 'Birthday & Celebration Frames'), name: 'Silver Jubilee Frame', slug: 'silver-jubilee-frame', tagline: '25 years of memories', price: 899 },
+  { ...cat('3', 'birthday-celebration', 'Birthday & Celebration Frames'), name: 'Celebration Photo Frame', slug: 'celebration-photo-frame', tagline: 'Any special occasion worth framing', price: 769 },
 
-  // Family (5)
-  { category_id: '4', categorySlug: 'family', categoryName: 'Family', name: 'Family Portrait Frame', slug: 'family-portrait-frame', tagline: 'Together forever', price: 749 },
-  { category_id: '4', categorySlug: 'family', categoryName: 'Family', name: 'Family Quote Frame', slug: 'family-quote-frame', tagline: 'Add your family quote', price: 699 },
-  { category_id: '4', categorySlug: 'family', categoryName: 'Family', name: 'Generations Frame', slug: 'generations-frame', tagline: 'Multi-generation family collage', price: 949 },
-  { category_id: '4', categorySlug: 'family', categoryName: 'Family', name: 'Family Reunion Frame', slug: 'family-reunion-frame', tagline: 'Everyone in one place', price: 999 },
-  { category_id: '4', categorySlug: 'family', categoryName: 'Family', name: 'Vacation Memories Frame', slug: 'vacation-memories-frame', tagline: 'Trip highlights collage', price: 879 },
+  // Wedding Collection (7)
+  { ...cat('4', 'wedding-collection', 'Wedding Collection'), name: 'Bride & Groom Frame', slug: 'bride-and-groom-frame', tagline: 'The perfect pair on display', price: 949 },
+  { ...cat('4', 'wedding-collection', 'Wedding Collection'), name: 'Wedding Highlights Frame', slug: 'wedding-highlights-frame', tagline: 'Best moments from your day', price: 999 },
+  { ...cat('4', 'wedding-collection', 'Wedding Collection'), name: 'Wedding Album Frame', slug: 'wedding-album-frame', tagline: 'Album-style multi-photo layout', price: 1099 },
+  { ...cat('4', 'wedding-collection', 'Wedding Collection'), name: 'Reception Photo Frame', slug: 'reception-photo-frame', tagline: 'Celebrate the reception night', price: 929 },
+  { ...cat('4', 'wedding-collection', 'Wedding Collection'), name: 'Haldi Ceremony Frame', slug: 'haldi-ceremony-frame', tagline: 'Golden haldi moments framed', price: 879 },
+  { ...cat('4', 'wedding-collection', 'Wedding Collection'), name: 'Mehndi Ceremony Frame', slug: 'mehndi-ceremony-frame', tagline: 'Intricate mehndi memories', price: 879 },
+  { ...cat('4', 'wedding-collection', 'Wedding Collection'), name: 'Sangeet Ceremony Frame', slug: 'sangeet-ceremony-frame', tagline: 'Music, dance and joy', price: 899 },
 
-  // Couple (5)
-  { category_id: '5', categorySlug: 'couple', categoryName: 'Couple', name: 'Couple Love Frame', slug: 'couple-love-frame', tagline: 'Romantic minimalist style', price: 799 },
-  { category_id: '5', categorySlug: 'couple', categoryName: 'Couple', name: 'Couple Travel Memories', slug: 'couple-travel-memories', tagline: 'Best trip moments in frame', price: 899 },
-  { category_id: '5', categorySlug: 'couple', categoryName: 'Couple', name: 'Date Night Frame', slug: 'date-night-frame', tagline: 'Romantic evening memories', price: 769 },
-  { category_id: '5', categorySlug: 'couple', categoryName: 'Couple', name: 'Engagement Story Frame', slug: 'engagement-story-frame', tagline: 'She said yes', price: 919 },
-  { category_id: '5', categorySlug: 'couple', categoryName: 'Couple', name: 'Honeymoon Collage Frame', slug: 'honeymoon-collage-frame', tagline: 'Paradise memories', price: 959 },
+  // Festival Frames (6)
+  { ...cat('5', 'festival', 'Festival Frames'), name: 'Diwali Photo Frame', slug: 'diwali-photo-frame', tagline: 'Festival of lights on your wall', price: 849 },
+  { ...cat('5', 'festival', 'Festival Frames'), name: 'Holi Photo Frame', slug: 'holi-photo-frame', tagline: 'Colours of Holi preserved forever', price: 829 },
+  { ...cat('5', 'festival', 'Festival Frames'), name: 'Raksha Bandhan Frame', slug: 'raksha-bandhan-frame', tagline: 'Brother-sister bond celebration', price: 799 },
+  { ...cat('5', 'festival', 'Festival Frames'), name: 'Eid Celebration Frame', slug: 'eid-celebration-frame', tagline: 'Eid mubarak memories', price: 819 },
+  { ...cat('5', 'festival', 'Festival Frames'), name: 'Christmas Photo Frame', slug: 'christmas-photo-frame', tagline: 'Holiday season family moments', price: 799 },
+  { ...cat('5', 'festival', 'Festival Frames'), name: 'New Year Photo Frame', slug: 'new-year-photo-frame', tagline: 'Welcome the new year in style', price: 769 },
 
-  // Graduation (5)
-  { category_id: '6', categorySlug: 'graduation', categoryName: 'Graduation', name: 'Graduation Achievement Frame', slug: 'graduation-achievement-frame', tagline: 'Celebrate your milestone', price: 849 },
-  { category_id: '6', categorySlug: 'graduation', categoryName: 'Graduation', name: 'Honor Roll Frame', slug: 'honor-roll-frame', tagline: 'Showcase academic pride', price: 829 },
-  { category_id: '6', categorySlug: 'graduation', categoryName: 'Graduation', name: 'Cap and Gown Frame', slug: 'cap-and-gown-frame', tagline: 'Classic graduation portrait', price: 799 },
-  { category_id: '6', categorySlug: 'graduation', categoryName: 'Graduation', name: 'Degree Day Frame', slug: 'degree-day-frame', tagline: 'Diploma display ready', price: 879 },
-  { category_id: '6', categorySlug: 'graduation', categoryName: 'Graduation', name: 'Scholar Achievement Frame', slug: 'scholar-achievement-frame', tagline: 'Awards and accolades', price: 899 },
+  // Memorial Frames (3)
+  { ...cat('6', 'memorial', 'Memorial Frames'), name: 'Tribute Photo Frame', slug: 'tribute-photo-frame', tagline: 'A respectful tribute display', price: 799 },
+  { ...cat('6', 'memorial', 'Memorial Frames'), name: 'Memory Photo Frame', slug: 'memory-photo-frame', tagline: 'Cherish their memory always', price: 779 },
+  { ...cat('6', 'memorial', 'Memorial Frames'), name: 'Remembrance Frame', slug: 'remembrance-frame', tagline: 'Forever in our hearts', price: 769 },
 
-  // Birthday (5)
-  { category_id: '7', categorySlug: 'birthday', categoryName: 'Birthday', name: 'Happy Birthday Frame', slug: 'happy-birthday-frame', tagline: 'Classic birthday celebration', price: 749 },
-  { category_id: '7', categorySlug: 'birthday', categoryName: 'Birthday', name: 'Milestone Birthday Collage', slug: 'milestone-birthday-collage', tagline: 'Every year in one frame', price: 899 },
-  { category_id: '7', categorySlug: 'birthday', categoryName: 'Birthday', name: 'Kids Party Frame', slug: 'kids-party-frame', tagline: 'Colorful fun for little ones', price: 699 },
-  { category_id: '7', categorySlug: 'birthday', categoryName: 'Birthday', name: 'Sweet Sixteen Frame', slug: 'sweet-sixteen-frame', tagline: 'Teen milestone keepsake', price: 819 },
-  { category_id: '7', categorySlug: 'birthday', categoryName: 'Birthday', name: 'Birthday Wishes Frame', slug: 'birthday-wishes-frame', tagline: 'Add name and age', price: 769 },
+  // Travel & Lifestyle Frames (4)
+  { ...cat('7', 'travel-lifestyle', 'Travel & Lifestyle Frames'), name: 'Travel Memories Frame', slug: 'travel-memories-frame', tagline: 'Your best trips on display', price: 879 },
+  { ...cat('7', 'travel-lifestyle', 'Travel & Lifestyle Frames'), name: 'Vacation Photo Frame', slug: 'vacation-photo-frame', tagline: 'Holiday highlights collage', price: 849 },
+  { ...cat('7', 'travel-lifestyle', 'Travel & Lifestyle Frames'), name: 'Adventure Photo Frame', slug: 'adventure-photo-frame', tagline: 'Bold adventures worth framing', price: 859 },
+  { ...cat('7', 'travel-lifestyle', 'Travel & Lifestyle Frames'), name: 'Nature Photo Frame', slug: 'nature-photo-frame', tagline: 'Landscapes and outdoor beauty', price: 829 },
 
-  // Friendship (5)
-  { category_id: '8', categorySlug: 'friendship', categoryName: 'Friendship', name: 'Best Friends Forever Frame', slug: 'best-friends-forever-frame', tagline: 'Celebrate your bond', price: 729 },
-  { category_id: '8', categorySlug: 'friendship', categoryName: 'Friendship', name: 'Squad Goals Collage', slug: 'squad-goals-collage', tagline: 'Group memories together', price: 899 },
-  { category_id: '8', categorySlug: 'friendship', categoryName: 'Friendship', name: 'Friendship Day Frame', slug: 'friendship-day-frame', tagline: 'Perfect gift for your crew', price: 749 },
-  { category_id: '8', categorySlug: 'friendship', categoryName: 'Friendship', name: 'College Buddies Frame', slug: 'college-buddies-frame', tagline: 'Campus days on your wall', price: 799 },
-  { category_id: '8', categorySlug: 'friendship', categoryName: 'Friendship', name: 'Memories Together Frame', slug: 'memories-together-frame', tagline: 'Trips and laughs framed', price: 829 },
+  // Personalized Frames (5)
+  { ...cat('8', 'personalized', 'Personalized Frames'), name: 'Collage Photo Frame', slug: 'collage-photo-frame', tagline: 'Multiple photos in one frame', price: 949 },
+  { ...cat('8', 'personalized', 'Personalized Frames'), name: 'Multi Photo Frame', slug: 'multi-photo-frame', tagline: 'Grid layout for many memories', price: 999 },
+  { ...cat('8', 'personalized', 'Personalized Frames'), name: 'Custom Name Photo Frame', slug: 'custom-name-photo-frame', tagline: 'Add a personal name touch', price: 819 },
+  { ...cat('8', 'personalized', 'Personalized Frames'), name: 'Spotify Song Photo Frame', slug: 'spotify-song-photo-frame', tagline: 'Your song as wall art', price: 899 },
+  { ...cat('8', 'personalized', 'Personalized Frames'), name: 'Instagram Style Photo Frame', slug: 'instagram-style-photo-frame', tagline: 'Social-style photo display', price: 879 },
 
-  // Housewarming (5)
-  { category_id: '9', categorySlug: 'housewarming', categoryName: 'Housewarming', name: 'New Home Frame', slug: 'new-home-frame', tagline: 'Welcome to your space', price: 779 },
-  { category_id: '9', categorySlug: 'housewarming', categoryName: 'Housewarming', name: 'Welcome Home Collage', slug: 'welcome-home-collage', tagline: 'First memories in the new house', price: 919 },
-  { category_id: '9', categorySlug: 'housewarming', categoryName: 'Housewarming', name: 'House Keys Keepsake', slug: 'house-keys-keepsake', tagline: 'Keys and photo display', price: 849 },
-  { category_id: '9', categorySlug: 'housewarming', categoryName: 'Housewarming', name: 'Family Nest Frame', slug: 'family-nest-frame', tagline: 'Warm tones for living room', price: 799 },
-  { category_id: '9', categorySlug: 'housewarming', categoryName: 'Housewarming', name: 'Hearth & Home Frame', slug: 'hearth-and-home-frame', tagline: 'Cozy home aesthetic', price: 829 },
-
-  // Festival (5)
-  { category_id: '10', categorySlug: 'festival', categoryName: 'Festival', name: 'Diwali Celebration Frame', slug: 'diwali-celebration-frame', tagline: 'Lights and joy on display', price: 849 },
-  { category_id: '10', categorySlug: 'festival', categoryName: 'Festival', name: 'Festival Lights Collage', slug: 'festival-lights-collage', tagline: 'Multi-photo festive layout', price: 949 },
-  { category_id: '10', categorySlug: 'festival', categoryName: 'Festival', name: 'Holiday Season Frame', slug: 'holiday-season-frame', tagline: 'Seasonal family moments', price: 799 },
-  { category_id: '10', categorySlug: 'festival', categoryName: 'Festival', name: 'Navratri Memories Frame', slug: 'navratri-memories-frame', tagline: 'Nine nights of celebration', price: 879 },
-  { category_id: '10', categorySlug: 'festival', categoryName: 'Festival', name: 'Festive Family Frame', slug: 'festive-family-frame', tagline: 'Gatherings worth framing', price: 819 },
+  // Trending Categories (2)
+  { ...cat('9', 'trending', 'Trending Categories'), name: 'Acrylic Photo Frame', slug: 'acrylic-photo-frame', tagline: 'Modern crystal-clear acrylic look', price: 1199, is_featured: true },
+  { ...cat('9', 'trending', 'Trending Categories'), name: 'LED Photo Frame', slug: 'led-photo-frame', tagline: 'Illuminated frame with warm glow', price: 1299 },
 ];
 
 module.exports = { CATALOG, CATEGORY_LIST };

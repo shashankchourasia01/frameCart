@@ -19,45 +19,41 @@ export const IMAGES = {
 } as const;
 
 export const CATEGORY_IMAGES: Record<string, { thumb: string; banner: string }> = {
-  wedding: {
-    thumb: pexels(265763, 600, 800),
-    banner: pexels(265763, 1600, 900),
-  },
-  anniversary: {
-    thumb: pexels(1444442, 600, 800),
-    banner: pexels(1444442, 1600, 900),
-  },
-  baby: {
-    thumb: pexels(1648387, 600, 800),
-    banner: pexels(3556686, 1600, 900),
-  },
-  family: {
+  'family-relationship': {
     thumb: pexels(1024993, 600, 800),
     banner: pexels(3778558, 1600, 900),
   },
-  couple: {
-    thumb: pexels(1451903, 600, 800),
-    banner: pexels(2253875, 1600, 900),
+  'baby-kids': {
+    thumb: pexels(1648387, 600, 800),
+    banner: pexels(3556686, 1600, 900),
   },
-  graduation: {
-    thumb: pexels(2673996, 600, 800),
-    banner: pexels(256490, 1600, 900),
-  },
-  birthday: {
+  'birthday-celebration': {
     thumb: pexels(3181718, 600, 800),
     banner: pexels(1128318, 1600, 900),
   },
-  friendship: {
-    thumb: pexels(17742, 600, 800),
-    banner: pexels(3992946, 1600, 900),
-  },
-  housewarming: {
-    thumb: pexels(1571460, 600, 800),
-    banner: pexels(584399, 1600, 900),
+  'wedding-collection': {
+    thumb: pexels(265763, 600, 800),
+    banner: pexels(265763, 1600, 900),
   },
   festival: {
     thumb: pexels(1080721, 600, 800),
     banner: pexels(1571468, 1600, 900),
+  },
+  memorial: {
+    thumb: pexels(1571463, 600, 800),
+    banner: pexels(271624, 1600, 900),
+  },
+  'travel-lifestyle': {
+    thumb: pexels(1571460, 600, 800),
+    banner: pexels(584399, 1600, 900),
+  },
+  personalized: {
+    thumb: pexels(3992946, 600, 800),
+    banner: pexels(2824194, 1600, 900),
+  },
+  trending: {
+    thumb: pexels(1128318, 600, 800),
+    banner: pexels(1579715, 1600, 900),
   },
 };
 

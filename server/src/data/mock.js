@@ -87,10 +87,14 @@ const products = CATALOG.map((item, index) =>
   })
 );
 
-products[0].requires_dynamic_fields = true;
-products[0].dynamic_field_config = {
-  fields: ['boy_name', 'girl_name', 'first_meet_date', 'engagement_date', 'wedding_date'],
-};
+const loveStory = products.find((p) => p.slug === 'love-story-photo-frame');
+if (loveStory) {
+  loveStory.requires_dynamic_fields = true;
+  loveStory.dynamic_field_config = {
+    fields: ['boy_name', 'girl_name', 'first_meet_date', 'engagement_date', 'wedding_date'],
+  };
+  loveStory.max_photos = 2;
+}
 
 const offers = [
   {

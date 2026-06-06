@@ -39,7 +39,7 @@ const sizes =
 const designs =
   `'[{"id":"d1","name":"Classic"},{"id":"d2","name":"Minimal"},{"id":"d3","name":"Modern Black"}]'::jsonb`;
 
-let sql = `-- FrameCraft full seed — ${CATALOG.length} products (generated)
+let sql = `-- FrameCraft full seed — ${CATALOG.length} products, ${CATEGORY_LIST.length} categories (generated)
 -- Run in Supabase SQL Editor AFTER schema.sql and rls_policies.sql
 
 -- Clear old catalog data (keeps order rows; unlinks product FK first)
@@ -72,7 +72,7 @@ sql += `UPDATE products SET
   requires_dynamic_fields = true,
   dynamic_field_config = '{"fields":["boy_name","girl_name","first_meet_date","engagement_date","wedding_date"]}'::jsonb,
   max_photos = 2
-WHERE slug = 'love-story-frame';
+WHERE slug = 'love-story-photo-frame';
 
 INSERT INTO offers (title, description, coupon_code, discount_type, discount_value, min_order_value, valid_till, is_featured, is_active, banner_image_url) VALUES
   ('Welcome Offer', 'Flat ₹100 off on your first order', 'WELCOME100', 'flat', 100, 499, now() + interval '90 days', true, true,

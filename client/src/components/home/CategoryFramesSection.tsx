@@ -5,7 +5,7 @@ import { ProductGridCompact } from '../product/ProductGridCompact';
 import { HiArrowRight } from '../icons';
 
 const FRAMES_PER_CATEGORY = 4;
-const FEATURED_CATEGORY_SLUGS = ['wedding', 'anniversary', 'couple'] as const;
+const FEATURED_CATEGORY_SLUGS = ['family-relationship', 'wedding-collection', 'baby-kids'] as const;
 
 function CategoryRow({ slug, name }: { slug: string; name: string }) {
   const { data: products, isLoading } = useProducts({ category: slug, limit: FRAMES_PER_CATEGORY });

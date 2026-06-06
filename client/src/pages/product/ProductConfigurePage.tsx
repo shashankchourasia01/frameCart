@@ -87,7 +87,7 @@ export function ProductConfigurePage() {
   }
 
   const categoryName = product.categories?.name ?? 'Frames';
-  const categorySlug = product.categories?.slug ?? 'wedding';
+  const categorySlug = product.categories?.slug ?? 'family-relationship';
   const sizeLabels = sizes.map((s) => s.label || s.inches);
 
   const designOptions = designs.map((d) => ({ value: d.id, label: d.name }));

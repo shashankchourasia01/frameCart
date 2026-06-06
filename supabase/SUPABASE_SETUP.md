@@ -23,12 +23,12 @@ Open **SQL Editor** in Supabase and run each file **once**, in this order:
 | 1 | `supabase/schema.sql` | Tables |
 | 2 | `supabase/rls_policies.sql` | Public read access |
 | 3 | `supabase/migrations/20250604_order_customer_address.sql` | Order address columns (if upgrading) |
-| 4 | `supabase/seed.sql` | **10 categories + 50 frames + offers** |
+| 4 | `supabase/seed.sql` | **9 categories + 50 frames + offers** |
 
 After step 4, verify:
 
 ```sql
-SELECT COUNT(*) FROM categories;  -- should be 10
+SELECT COUNT(*) FROM categories;  -- should be 9
 SELECT COUNT(*) FROM products;    -- should be 50
 ```
 

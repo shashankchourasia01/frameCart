@@ -2,16 +2,15 @@ import type { Product } from '../types';
 
 /** Short codes for admin frame IDs (category + sequence) */
 export const CATEGORY_CODES: Record<string, string> = {
-  wedding: 'WED',
-  anniversary: 'ANN',
-  baby: 'BAB',
-  family: 'FAM',
-  couple: 'CPL',
-  graduation: 'GRD',
-  birthday: 'BDY',
-  friendship: 'FRD',
-  housewarming: 'HSE',
+  'family-relationship': 'FAM',
+  'baby-kids': 'BAB',
+  'birthday-celebration': 'BDY',
+  'wedding-collection': 'WED',
   festival: 'FST',
+  memorial: 'MEM',
+  'travel-lifestyle': 'TRV',
+  personalized: 'PRS',
+  trending: 'TRD',
 };
 
 /** Global catalog number e.g. FC-042 */
