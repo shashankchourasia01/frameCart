@@ -1,15 +1,18 @@
 import { motion } from 'framer-motion';
 import { useOffers } from '../hooks/useOffers';
-import { CouponChip } from '../components/shared/CouponChip';
-import { formatPrice } from '../lib/utils';
+import { useCategories } from '../hooks/useCategories';
+import { OfferCard } from '../components/offers/OfferCard';
 import { pageTransition } from '../animations/variants';
-import { IMAGES, getOfferBanner } from '../constants/images';
+import { IMAGES } from '../constants/images';
 
 export function OffersPage() {
   const { data: offers, isLoading } = useOffers();
-  const now = Date.now();
-  const active = offers?.filter((o) => new Date(o.valid_till).getTime() > now) ?? [];
-  const expired = offers?.filter((o) => new Date(o.valid_till).getTime() <= now) ?? [];
+  const { data: categories } = useCategories();
+
+  const categoryName = (slug: string) => categories?.find((c) => c.slug === slug)?.name;
+
+  const featured = offers?.filter((o) => o.is_featured) ?? [];
+  const regular = offers?.filter((o) => !o.is_featured) ?? [];
 
   return (
     <motion.div
@@ -19,80 +22,58 @@ export function OffersPage() {
       className="pb-24"
     >
       <div className="relative h-48 overflow-hidden sm:h-56">
-        <img
-          src={IMAGES.offerBg}
-          alt=""
-          aria-hidden
-          className="h-full w-full object-cover"
-        />
+        <img src={IMAGES.offerBg} alt="" aria-hidden className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-brand-maroon/80" />
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
           <h1 className="font-display text-4xl font-bold text-white sm:text-5xl">Deals & Offers</h1>
+          <p className="mt-2 max-w-md text-sm text-white/85">
+            Active coupons and seasonal discounts on custom photo frames
+          </p>
         </div>
       </div>
 
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
         {isLoading && <p className="text-brand-charcoal-light">Loading offers...</p>}
 
-        <div className="space-y-5">
-          {active.map((o) => (
-            <div
-              key={o.id}
-              className={`overflow-hidden rounded-card shadow-card ${
-                o.is_featured ? 'ring-2 ring-brand-gold/40' : ''
-              }`}
-            >
-              {getOfferBanner(o.banner_image_url) && (
-                <div className="relative h-36">
-                  <img
-                    src={getOfferBanner(o.banner_image_url)}
-                    alt=""
-                    referrerPolicy="no-referrer"
-                    className="h-full w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                </div>
-              )}
-              <div className={`p-6 ${o.is_featured ? 'bg-gold-gradient' : 'bg-white'}`}>
-                {o.is_featured && (
-                  <span className="mb-2 inline-block rounded-full bg-brand-maroon/10 px-3 py-0.5 text-xs font-semibold text-brand-maroon">
-                    Featured
-                  </span>
-                )}
-                <h2 className="font-heading text-xl font-semibold">{o.title}</h2>
-                <p className="mt-2 text-sm text-brand-charcoal-light">{o.description}</p>
-                {o.coupon_code && (
-                  <div className="mt-4">
-                    <CouponChip code={o.coupon_code} />
-                  </div>
-                )}
-                <p className="mt-3 text-sm font-medium text-brand-maroon">
-                  {o.discount_type === 'percentage'
-                    ? `${o.discount_value}% off`
-                    : `${formatPrice(Number(o.discount_value))} off`}
-                  {o.min_order_value > 0 && (
-                    <span className="font-normal text-brand-charcoal-light">
-                      {' '}
-                      · Min order {formatPrice(Number(o.min_order_value))}
-                    </span>
-                  )}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        {!isLoading && (!offers || offers.length === 0) && (
+          <div className="rounded-card border border-dashed border-neutral-200 bg-white p-10 text-center">
+            <p className="font-medium text-brand-charcoal">No active offers right now</p>
+            <p className="mt-1 text-sm text-brand-charcoal-light">
+              Check back soon — new deals are added from the admin panel.
+            </p>
+          </div>
+        )}
 
-        {expired.length > 0 && (
-          <section className="mt-14">
-            <h2 className="font-heading text-lg text-brand-charcoal-light">Expired</h2>
-            <div className="mt-4 space-y-3 opacity-60">
-              {expired.map((o) => (
-                <div key={o.id} className="rounded-card bg-brand-ivory-dark p-4">
-                  <span className="rounded-full bg-brand-charcoal-light px-2 py-0.5 text-xs text-white">
-                    Expired
-                  </span>
-                  <p className="mt-2 font-medium">{o.title}</p>
-                </div>
+        {featured.length > 0 && (
+          <section className="space-y-5">
+            <h2 className="font-heading text-lg font-semibold text-brand-charcoal">Featured deals</h2>
+            {featured.map((o) => (
+              <OfferCard
+                key={o.id}
+                offer={o}
+                variant="featured"
+                categoryName={
+                  o.applicable_to !== 'all' ? categoryName(o.applicable_to) : undefined
+                }
+              />
+            ))}
+          </section>
+        )}
+
+        {regular.length > 0 && (
+          <section className={featured.length > 0 ? 'mt-12 space-y-5' : 'space-y-5'}>
+            {featured.length > 0 ? (
+              <h2 className="font-heading text-lg font-semibold text-brand-charcoal">More offers</h2>
+            ) : null}
+            <div className="grid gap-5 sm:grid-cols-2">
+              {regular.map((o) => (
+                <OfferCard
+                  key={o.id}
+                  offer={o}
+                  categoryName={
+                    o.applicable_to !== 'all' ? categoryName(o.applicable_to) : undefined
+                  }
+                />
               ))}
             </div>
           </section>

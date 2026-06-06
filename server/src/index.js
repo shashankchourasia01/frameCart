@@ -16,6 +16,11 @@ const adminRouter = require('./routes/admin');
 const validateCouponRouter = require('./routes/validateCoupon');
 const { supabase } = require('./lib/supabase');
 const mock = require('./data/mock');
+const categoryStore = require('./lib/mockCategoryStore');
+const offerStore = require('./lib/mockOfferStore');
+
+categoryStore.init();
+offerStore.init();
 
 const app = express();
 const PORT = process.env.PORT || 5000;

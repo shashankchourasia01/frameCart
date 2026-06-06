@@ -11,6 +11,10 @@ interface ProductGridCompactProps {
   className?: string;
 }
 
+/** Responsive compact grid — 2 cols mobile, 4 cols desktop */
+const GRID_CLASS =
+  'grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4';
+
 /** 2-column compact product grid (Printo-style) */
 export function ProductGridCompact({
   products = [],
@@ -20,7 +24,7 @@ export function ProductGridCompact({
 }: ProductGridCompactProps) {
   if (isLoading) {
     return (
-      <div className={`grid grid-cols-2 gap-2 sm:gap-3 ${className}`}>
+      <div className={`${GRID_CLASS} ${className}`}>
         {Array.from({ length: skeletonCount }).map((_, i) => (
           <ProductCardCompactSkeleton key={i} />
         ))}
@@ -34,7 +38,7 @@ export function ProductGridCompact({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.05 }}
-      className={`grid grid-cols-2 gap-2 sm:gap-3 ${className}`}
+      className={`${GRID_CLASS} ${className}`}
     >
       {products.map((p) => (
         <motion.div key={p.id} variants={fadeUp} className="min-w-0">

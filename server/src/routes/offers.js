@@ -1,6 +1,6 @@
 const express = require('express');
 const { supabase } = require('../lib/supabase');
-const mock = require('../data/mock');
+const offerStore = require('../lib/mockOfferStore');
 
 const router = express.Router();
 
@@ -11,11 +11,13 @@ router.get('/', async (_req, res, next) => {
         .from('offers')
         .select('*')
         .eq('is_active', true)
-        .gt('valid_till', new Date().toISOString());
+        .gt('valid_till', new Date().toISOString())
+        .order('is_featured', { ascending: false })
+        .order('valid_till', { ascending: true });
       if (error) throw error;
       return res.json(data);
     }
-    res.json(mock.offers);
+    res.json(offerStore.listActive());
   } catch (e) {
     next(e);
   }

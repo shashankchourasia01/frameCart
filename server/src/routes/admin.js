@@ -4,10 +4,14 @@ const { supabase } = require('../lib/supabase');
 const mock = require('../data/mock');
 const mockOrders = require('../lib/mockOrderStore');
 const adminProductsRouter = require('./adminProducts');
+const adminCategoriesRouter = require('./adminCategories');
+const adminOffersRouter = require('./adminOffers');
 
 const router = express.Router();
 router.use(authMiddleware);
 router.use('/products', adminProductsRouter);
+router.use('/categories', adminCategoriesRouter);
+router.use('/offers', adminOffersRouter);
 
 router.get('/dashboard', async (_req, res) => {
   const ordersTrend = Array.from({ length: 7 }, (_, i) => {

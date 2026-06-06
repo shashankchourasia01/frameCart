@@ -12,7 +12,7 @@ function CategoryRow({ slug, name }: { slug: string; name: string }) {
 
   return (
     <section className="border-b border-neutral-100 py-10 last:border-0 sm:py-12">
-      <div className="mx-auto max-w-2xl px-4 sm:px-0">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-6xl xl:max-w-7xl">
         <div className="text-center">
           <h2 className="font-display text-xl font-bold text-brand-charcoal sm:text-2xl">{name} Frames</h2>
           <p className="mt-1 text-sm text-brand-charcoal-light">
@@ -44,7 +44,7 @@ export function CategoryFramesSection() {
   if (isLoading) {
     return (
       <section className="bg-white py-10">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-6xl xl:max-w-7xl">
           <ProductGridCompact isLoading skeletonCount={4} />
         </div>
       </section>

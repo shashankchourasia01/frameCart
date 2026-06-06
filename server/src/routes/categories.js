@@ -1,6 +1,6 @@
 const express = require('express');
 const { supabase } = require('../lib/supabase');
-const mock = require('../data/mock');
+const categoryStore = require('../lib/mockCategoryStore');
 
 const router = express.Router();
 
@@ -18,7 +18,7 @@ router.get('/', async (_req, res, next) => {
         '[categories] Supabase returned 0 categories — falling back to mock. Run supabase/seed.sql'
       );
     }
-    res.json(mock.categories);
+    res.json(categoryStore.listActive());
   } catch (e) {
     next(e);
   }

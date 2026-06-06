@@ -16,7 +16,12 @@ router.get('/', async (req, res, next) => {
       if (featured === 'true') q = q.eq('is_featured', true);
       if (bestseller === 'true') q = q.eq('is_bestseller', true);
       if (category) {
-        const { data: cat } = await supabase.from('categories').select('id').eq('slug', category).single();
+        const { data: cat } = await supabase
+          .from('categories')
+          .select('id')
+          .eq('slug', category)
+          .eq('is_active', true)
+          .single();
         if (cat) q = q.eq('category_id', cat.id);
       }
       q = q.order('sort_order');

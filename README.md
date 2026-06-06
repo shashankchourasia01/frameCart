@@ -39,6 +39,8 @@ The API serves **42 mock frames** when Supabase is not configured in `server/.en
 
 Full steps: **[supabase/SUPABASE_SETUP.md](supabase/SUPABASE_SETUP.md)**
 
+**Production deploy (services, costs, image storage — Hinglish):** **[docs/PRODUCTION_DEPLOYMENT_GUIDE.md](docs/PRODUCTION_DEPLOYMENT_GUIDE.md)**
+
 Check API: `http://localhost:5000/health` should show `dataSource` and product count hints.
 
 ## Scripts
