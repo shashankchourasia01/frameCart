@@ -18,7 +18,6 @@ import {
   HiCurrencyRupee,
   HiGift,
   HiHeart,
-  HiHome,
   HiInformationCircle,
   HiMinus,
   HiMoon,
@@ -30,7 +29,6 @@ import {
   HiSun,
   HiTag,
   HiTruck,
-  HiUser,
   HiUserGroup,
   HiXMark,
   HiChatBubbleLeftRight,
@@ -43,6 +41,9 @@ import {
   HiDocumentText,
   HiLink,
   HiFolder,
+  HiFaceSmile,
+  HiGlobeAlt,
+  HiFire,
 } from 'react-icons/hi2';
 import { FaWhatsapp } from 'react-icons/fa';
 import { cn } from '../../lib/utils';
@@ -93,17 +94,20 @@ export function WhatsAppIcon(props: Omit<AppIconProps, 'icon'>) {
   return <AppIcon icon={FaWhatsapp} {...props} />;
 }
 
+/** One distinct icon per category — shop grid, admin, category pages */
 const CATEGORY_ICON_MAP: Record<string, IconType> = {
   'family-relationship': HiUserGroup,
-  'baby-kids': HiUser,
+  'baby-kids': HiFaceSmile,
   'birthday-celebration': HiGift,
   'wedding-collection': HiHeart,
   festival: HiSparkles,
-  memorial: HiPhoto,
-  'travel-lifestyle': HiHome,
-  personalized: HiSparkles,
-  trending: HiSparkles,
+  memorial: HiMoon,
+  'travel-lifestyle': HiGlobeAlt,
+  personalized: HiPaintBrush,
+  trending: HiFire,
 };
+
+export { CATEGORY_ICON_MAP };
 
 export function CategoryIcon({
   slug,

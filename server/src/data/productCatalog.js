@@ -94,7 +94,7 @@ function cat(id, slug, name) {
 }
 
 const CATALOG = [
-  // Family & Relationship Frames (11)
+  // Family & Relationship Frames (10)
   { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Anniversary Photo Frame', slug: 'anniversary-photo-frame', tagline: 'Celebrate every year together', price: 849 },
   { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Wedding Photo Frame', slug: 'wedding-photo-frame', tagline: 'Classic wedding portrait display', price: 899 },
   { ...cat('1', 'family-relationship', 'Family & Relationship Frames'), name: 'Pre-Wedding Photo Frame', slug: 'pre-wedding-photo-frame', tagline: 'Before the big day memories', price: 879 },
