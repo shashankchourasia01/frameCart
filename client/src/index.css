@@ -8,6 +8,8 @@
   }
   body {
     @apply font-body text-brand-charcoal bg-brand-ivory antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 

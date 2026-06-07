@@ -24,7 +24,7 @@ export default {
       fontFamily: {
         display: ['"Cormorant Garamond"', 'serif'],
         heading: ['"Playfair Display"', 'serif'],
-        body: ['"DM Sans"', 'sans-serif'],
+        body: ['"Inter"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         card: '16px',
