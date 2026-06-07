@@ -9,6 +9,7 @@ import { Footer } from './components/layout/Footer';
 import { BottomNav } from './components/layout/BottomNav';
 import { OfferBanner } from './components/layout/OfferBanner';
 import { ScrollToTop } from './components/layout/ScrollToTop';
+import { cn } from './lib/utils';
 import { CartDrawer } from './components/cart/CartDrawer';
 import { WhatsAppFAB } from './components/shared/WhatsAppFAB';
 import { AdminGuard } from './components/admin/AdminGuard';
@@ -128,12 +129,16 @@ function AppShell() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
   const isLogin = location.pathname === '/admin/login';
-
   return (
   <div className="min-h-screen bg-brand-ivory">
     <ScrollToTop />
     <CustomerLayout />
-    <main className={!isAdmin ? 'pb-20 md:pb-0' : 'min-h-screen w-full overflow-x-hidden bg-neutral-50'}>
+    <main
+      className={cn(
+        !isAdmin && 'pb-20 md:pb-0',
+        isAdmin && 'min-h-screen w-full overflow-x-hidden bg-neutral-50'
+      )}
+    >
       <AnimatedRoutes />
     </main>
     {!isAdmin && (

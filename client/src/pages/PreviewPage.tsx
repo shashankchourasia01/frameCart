@@ -152,7 +152,7 @@ export function PreviewPage() {
       variants={pageTransition}
       initial="initial"
       animate="animate"
-      className={cn(productFlowOuter, productFlowPad, 'py-8 pb-12 lg:pb-16')}
+      className={cn(productFlowOuter, productFlowPad, 'py-8 pb-8 lg:pb-16')}
     >
       <h1 className="text-center text-lg font-bold text-brand-charcoal lg:text-2xl">Checkout</h1>
       <p className="mt-2 text-center text-sm text-brand-charcoal-light lg:text-base">

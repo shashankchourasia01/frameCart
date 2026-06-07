@@ -5,7 +5,7 @@ import { buildOrderPayload } from '../../lib/buildOrderPayload';
 import { ZoominPhotoUploader } from '../../components/product/flow/ZoominPhotoUploader';
 import { PrintoUploadButton } from '../../components/product/printo/PrintoUploadButton';
 import { formatPrice } from '../../lib/utils';
-import { productFlowOuter, productFlowPad, productFlowStickyInner } from '../../lib/productFlowLayout';
+import { productFlowOuter, productFlowPad } from '../../lib/productFlowLayout';
 import { cn } from '../../lib/utils';
 
 export function ProductUploadPage() {
@@ -73,7 +73,7 @@ export function ProductUploadPage() {
   const total = pricing.unitPrice * quantity;
 
   return (
-    <div className="min-h-screen bg-white pb-24 lg:pb-8">
+    <div className="min-h-screen bg-white pb-8 lg:pb-8">
       <div className={productFlowOuter}>
         <div className={cn(productFlowPad, 'border-b border-neutral-200 py-3 lg:py-4')}>
           <p className="text-xs text-brand-charcoal-light lg:text-sm">
@@ -107,7 +107,7 @@ export function ProductUploadPage() {
               <span>Total</span>
               <span className="text-orange-600">{formatPrice(total)}</span>
             </div>
-            <div className="hidden pt-4 lg:block">
+            <div className="pt-4">
               <PrintoUploadButton
                 label="Continue to preview"
                 onClick={continueReview}
@@ -115,16 +115,6 @@ export function ProductUploadPage() {
               />
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="fixed bottom-0 left-0 right-0 z-30 border-t bg-white/95 p-3 backdrop-blur lg:hidden">
-        <div className={productFlowStickyInner}>
-          <PrintoUploadButton
-            label="Continue to preview"
-            onClick={continueReview}
-            disabled={photoUrls.length < 1}
-          />
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { useProductOrder } from '../../hooks/useProductOrder';
 import { buildOrderPayload } from '../../lib/buildOrderPayload';
 import { addRecentlyViewed } from '../../lib/recentlyViewed';
-import { productFlowOuter, productFlowPad, productFlowStickyInner } from '../../lib/productFlowLayout';
+import { productFlowOuter, productFlowPad } from '../../lib/productFlowLayout';
 import { PrintoProductGallery } from '../../components/product/printo/PrintoProductGallery';
 import { PrintoOptionRow } from '../../components/product/printo/PrintoOptionRow';
 import { PrintoPriceSummary } from '../../components/product/printo/PrintoPriceSummary';
@@ -100,7 +100,7 @@ export function ProductConfigurePage() {
   );
 
   return (
-    <div className="min-h-screen bg-white pb-24 lg:pb-8">
+    <div className="min-h-screen bg-white pb-8 lg:pb-8">
       <div className={productFlowOuter}>
         <nav
           className={cn(productFlowPad, 'py-3 text-xs text-brand-charcoal-light lg:py-4 lg:text-sm')}
@@ -170,6 +170,10 @@ export function ProductConfigurePage() {
               )}
             </div>
 
+            <div className="mt-4 border-t border-neutral-100 pt-4">
+              <PrintoUploadButton onClick={goUpload} />
+            </div>
+
             <PrintoPriceSummary
               unitPrice={pricing.unitPrice}
               quantity={quantity}
@@ -186,10 +190,6 @@ export function ProductConfigurePage() {
               </div>
             )}
 
-            <div className="mt-6 hidden lg:block">
-              <PrintoUploadButton onClick={goUpload} />
-            </div>
-
             <div className="mt-6 lg:mt-8">
               <DeliveryPincode />
               <FrameSizeGuide />
@@ -205,12 +205,6 @@ export function ProductConfigurePage() {
             categoryName={categoryName}
           />
           <ProductRecommendations categorySlug={categorySlug} currentSlug={product.slug} />
-        </div>
-      </div>
-
-      <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-neutral-200 bg-white/95 p-3 backdrop-blur lg:hidden">
-        <div className={productFlowStickyInner}>
-          <PrintoUploadButton onClick={goUpload} />
         </div>
       </div>
     </div>

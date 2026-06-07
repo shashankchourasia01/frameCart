@@ -5,7 +5,7 @@ import { PhotoEditModal } from '../../components/product/flow/PhotoEditModal';
 import { PrintoUploadButton } from '../../components/product/printo/PrintoUploadButton';
 import { FramePreview } from '../../components/product/FramePreview';
 import { formatPrice } from '../../lib/utils';
-import { productFlowOuter, productFlowPad, productFlowStickyInner } from '../../lib/productFlowLayout';
+import { productFlowOuter, productFlowPad } from '../../lib/productFlowLayout';
 import { cn } from '../../lib/utils';
 
 export function ProductReviewPage() {
@@ -52,7 +52,7 @@ export function ProductReviewPage() {
   const total = pricing.unitPrice * quantity;
 
   return (
-    <div className="min-h-screen bg-white pb-24 lg:pb-8">
+    <div className="min-h-screen bg-white pb-8 lg:pb-8">
       <div className={productFlowOuter}>
         <div className={cn(productFlowPad, 'border-b border-neutral-200 py-3 lg:py-4')}>
           <p className="text-xs text-brand-charcoal-light lg:text-sm">
@@ -114,16 +114,10 @@ export function ProductReviewPage() {
               Back to upload
             </Link>
 
-            <div className="mt-6 hidden lg:block">
+            <div className="mt-6">
               <PrintoUploadButton label="Continue to checkout" onClick={goCheckout} />
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="fixed bottom-0 left-0 right-0 z-30 border-t bg-white/95 p-3 backdrop-blur lg:hidden">
-        <div className={productFlowStickyInner}>
-          <PrintoUploadButton label="Continue to checkout" onClick={goCheckout} />
         </div>
       </div>
 
