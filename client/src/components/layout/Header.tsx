@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCartStore } from '../../store/cartStore';
 import { AnimatedCounter } from '../shared/AnimatedCounter';
@@ -33,40 +33,26 @@ function MenuIcon() {
   );
 }
 
+function isNavActive(pathname: string, to: string) {
+  if (to === '/shop') {
+    return pathname === '/shop' || pathname.startsWith('/category');
+  }
+  return pathname === to;
+}
+
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const { totalItems, setOpen } = useCartStore();
   const count = totalItems();
-  const isHome = location.pathname === '/';
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const transparent = isHome && !scrolled;
 
   return (
     <>
-      <header
-        className={cn(
-          'sticky top-0 z-50 transition-all duration-300',
-          transparent
-            ? 'bg-gradient-to-b from-brand-charcoal/45 via-brand-charcoal/20 to-transparent'
-            : 'border-b border-brand-ivory-dark/80 bg-white/90 shadow-sticky-header backdrop-blur-lg'
-        )}
-      >
+      <header className="sticky top-0 z-50 border-b border-brand-ivory-dark/80 bg-white shadow-sticky-header">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link
             to="/"
-            className={cn(
-              'font-display text-2xl font-bold tracking-tight transition',
-              transparent ? 'text-white' : 'text-brand-maroon'
-            )}
-            style={transparent ? { textShadow: '0 2px 10px rgba(0,0,0,0.35)' } : undefined}
+            className="font-display text-2xl font-bold tracking-tight text-brand-maroon"
           >
             {APP_NAME}
           </Link>
@@ -78,17 +64,9 @@ export function Header() {
                 to={link.to}
                 className={cn(
                   'rounded-full px-4 py-2 text-sm font-medium transition',
-                  transparent
-                    ? location.pathname === link.to ||
-                        (link.to === '/shop' &&
-                          (location.pathname === '/shop' || location.pathname.startsWith('/category')))
-                      ? 'bg-white/15 text-white'
-                      : 'text-white/80 hover:bg-white/10 hover:text-white'
-                    : location.pathname === link.to ||
-                        (link.to === '/shop' &&
-                          (location.pathname === '/shop' || location.pathname.startsWith('/category')))
-                      ? 'bg-brand-maroon-light text-brand-maroon'
-                      : 'text-brand-charcoal hover:bg-brand-ivory-dark'
+                  isNavActive(location.pathname, link.to)
+                    ? 'bg-brand-maroon-light text-brand-maroon'
+                    : 'text-brand-charcoal hover:bg-brand-ivory-dark'
                 )}
               >
                 {link.label}
@@ -100,12 +78,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className={cn(
-                'relative rounded-full p-2.5 transition',
-                transparent
-                  ? 'border border-white/25 bg-black/15 text-white hover:bg-black/25'
-                  : 'text-brand-charcoal hover:bg-brand-ivory-dark'
-              )}
+              className="relative rounded-full p-2.5 text-brand-charcoal transition hover:bg-brand-ivory-dark"
               aria-label={`Cart, ${count} items`}
             >
               <CartIcon />
@@ -124,12 +97,7 @@ export function Header() {
             </button>
             <button
               type="button"
-              className={cn(
-                'rounded-full p-2.5 md:hidden',
-                transparent
-                  ? 'border border-white/25 bg-black/15 text-white hover:bg-black/25'
-                  : 'text-brand-charcoal hover:bg-brand-ivory-dark'
-              )}
+              className="rounded-full p-2.5 text-brand-charcoal transition hover:bg-brand-ivory-dark md:hidden"
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
             >

@@ -31,7 +31,6 @@ import {
   HiTruck,
   HiUserGroup,
   HiXMark,
-  HiChatBubbleLeftRight,
   HiCamera,
   HiShoppingBag,
   HiPaintBrush,
@@ -139,10 +138,10 @@ export function CategoryIcon({
 export type TrustIconKey = 'frames' | 'rating' | 'delivery' | 'support';
 
 const TRUST_ICON_MAP: Record<TrustIconKey, IconType> = {
-  frames: HiPhoto,
+  frames: HiRectangleStack,
   rating: HiStar,
   delivery: HiTruck,
-  support: HiChatBubbleLeftRight,
+  support: FaWhatsapp,
 };
 
 export function TrustIcon({ name, size = 'md', className }: { name: TrustIconKey; size?: IconSize; className?: string }) {

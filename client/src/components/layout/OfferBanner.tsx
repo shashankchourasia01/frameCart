@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TRUST_SIGNALS } from '../../constants';
-import { TrustIcon } from '../icons';
+import { TrustIcon, type TrustIconKey } from '../icons';
+import { cn } from '../../lib/utils';
 
 const FEATURE_DISPLAY_MS = 3000;
 const SLIDE_DURATION_S = 0.5;
+
+const FEATURE_ICON_STYLES: Record<TrustIconKey, { badge: string; icon: string }> = {
+  frames: { badge: 'bg-brand-gold/25', icon: 'text-brand-gold-light' },
+  rating: { badge: 'bg-brand-gold/30', icon: 'text-brand-gold' },
+  delivery: { badge: 'bg-white/15', icon: 'text-white' },
+  support: { badge: 'bg-brand-whatsapp/25', icon: 'text-brand-whatsapp' },
+};
 
 export function OfferBanner() {
   const [index, setIndex] = useState(0);
@@ -17,6 +25,7 @@ export function OfferBanner() {
   }, []);
 
   const feature = TRUST_SIGNALS[index];
+  const iconStyle = FEATURE_ICON_STYLES[feature.icon];
 
   return (
     <div
@@ -34,11 +43,18 @@ export function OfferBanner() {
             transition={{ duration: SLIDE_DURATION_S, ease: 'easeInOut' }}
             className="flex w-full max-w-none items-center justify-center gap-3"
           >
-            <TrustIcon
-              name={feature.icon}
-              size="md"
-              className="shrink-0 text-brand-gold-light"
-            />
+            <span
+              className={cn(
+                'flex h-7 w-7 shrink-0 items-center justify-center rounded-full sm:h-8 sm:w-8',
+                iconStyle.badge
+              )}
+            >
+              <TrustIcon
+                name={feature.icon}
+                size="sm"
+                className={iconStyle.icon}
+              />
+            </span>
             <span className="text-sm font-medium tracking-wide sm:text-base">
               {feature.label}
             </span>
