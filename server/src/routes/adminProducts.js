@@ -3,6 +3,7 @@ const { z } = require('zod');
 const { supabase } = require('../lib/supabase');
 const mock = require('../data/mock');
 const store = require('../lib/mockProductStore');
+const { PRODUCT_BADGE_KEYS, syncBadgeWithFlags } = require('../constants/productBadges');
 
 const router = express.Router();
 
@@ -38,6 +39,7 @@ const productBodySchema = z.object({
     .nullable()
     .optional(),
   images: z.array(z.string()).default([]),
+  badge: z.enum(PRODUCT_BADGE_KEYS).nullable().optional(),
   is_featured: z.boolean().default(false),
   is_bestseller: z.boolean().default(false),
   is_active: z.boolean().default(true),
@@ -58,7 +60,7 @@ function normalizeDesigns(designs) {
 }
 
 function normalizeRow(body) {
-  const row = { ...body };
+  const row = syncBadgeWithFlags({ ...body });
   if (body.available_designs) {
     row.available_designs = normalizeDesigns(body.available_designs);
   }

@@ -1,3 +1,7 @@
+import type { ProductBadge } from '../constants/productBadges';
+
+export type { ProductBadge };
+
 export interface Category {
   id: string;
   name: string;
@@ -46,6 +50,7 @@ export interface Product {
   images: string[];
   is_featured: boolean;
   is_bestseller: boolean;
+  badge?: ProductBadge | null;
   is_active: boolean;
   sort_order: number;
   review_count: number;

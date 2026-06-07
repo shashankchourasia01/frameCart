@@ -6,6 +6,7 @@ import { ProductGridCompact } from '../components/product/ProductGridCompact';
 import { EmptyState } from '../components/shared/EmptyState';
 import { Breadcrumbs } from '../components/shared/Breadcrumbs';
 import { HiArrowRight } from '../components/icons';
+import { badgeSortScore } from '../constants/productBadges';
 
 type SortKey = 'latest' | 'price-asc' | 'price-desc' | 'bestseller';
 
@@ -29,7 +30,7 @@ export function CategoryPage() {
     const list = [...(products ?? [])];
     if (sort === 'price-asc') list.sort((a, b) => Number(a.base_price) - Number(b.base_price));
     if (sort === 'price-desc') list.sort((a, b) => Number(b.base_price) - Number(a.base_price));
-    if (sort === 'bestseller') list.sort((a, b) => (b.is_bestseller ? 1 : 0) - (a.is_bestseller ? 1 : 0));
+    if (sort === 'bestseller') list.sort((a, b) => badgeSortScore(b) - badgeSortScore(a));
     return list;
   }, [products, sort]);
 

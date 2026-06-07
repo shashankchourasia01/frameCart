@@ -1,6 +1,12 @@
 import { slugify } from './utils';
 import type { Product, ProductDesign, ProductSize } from '../types';
 import type { ProductInput } from '../hooks/useAdminProducts';
+import {
+  isProductBadge,
+  resolveProductBadge,
+  syncBadgeWithFlags,
+  type ProductBadge,
+} from '../constants/productBadges';
 
 export interface ProductFormState {
   category_id: string;
@@ -18,8 +24,7 @@ export interface ProductFormState {
   requires_dynamic_fields: boolean;
   dynamic_fields_text: string;
   images: string[];
-  is_featured: boolean;
-  is_bestseller: boolean;
+  badge: ProductBadge | '';
   is_active: boolean;
   sort_order: string;
   review_count: string;
@@ -46,8 +51,7 @@ export function emptyProductForm(): ProductFormState {
     requires_dynamic_fields: false,
     dynamic_fields_text: '',
     images: [''],
-    is_featured: false,
-    is_bestseller: false,
+    badge: '',
     is_active: true,
     sort_order: '0',
     review_count: '0',
@@ -76,8 +80,7 @@ export function productToForm(product: Product): ProductFormState {
     requires_dynamic_fields: product.requires_dynamic_fields,
     dynamic_fields_text: (product.dynamic_field_config?.fields ?? []).join(', '),
     images: product.images.length ? [...product.images] : [''],
-    is_featured: product.is_featured,
-    is_bestseller: product.is_bestseller,
+    badge: resolveProductBadge(product) ?? '',
     is_active: product.is_active,
     sort_order: String(product.sort_order),
     review_count: String(product.review_count),
@@ -118,8 +121,7 @@ export function formToPayload(form: ProductFormState): ProductInput {
     requires_dynamic_fields: form.requires_dynamic_fields,
     dynamic_field_config: form.requires_dynamic_fields ? { fields } : null,
     images: form.images.map((u) => u.trim()).filter(Boolean),
-    is_featured: form.is_featured,
-    is_bestseller: form.is_bestseller,
+    ...syncBadgeWithFlags(form.badge && isProductBadge(form.badge) ? form.badge : null),
     is_active: form.is_active,
     sort_order: Number(form.sort_order) || 0,
     review_count: Number(form.review_count) || 0,

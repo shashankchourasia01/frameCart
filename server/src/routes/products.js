@@ -2,6 +2,7 @@ const express = require('express');
 const { supabase } = require('../lib/supabase');
 const mock = require('../data/mock');
 const store = require('../lib/mockProductStore');
+const { PRODUCT_BADGE_KEYS, matchesBestsellerFilter } = require('../constants/productBadges');
 
 store.init(mock.products);
 
@@ -9,12 +10,15 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const { category, featured, bestseller, limit } = req.query;
+    const { category, featured, bestseller, badge, limit } = req.query;
 
     if (supabase) {
       let q = supabase.from('products').select('*, categories(name, slug)').eq('is_active', true);
       if (featured === 'true') q = q.eq('is_featured', true);
-      if (bestseller === 'true') q = q.eq('is_bestseller', true);
+      if (bestseller === 'true') {
+        q = q.or('badge.in.(best_seller,top_seller_month),is_bestseller.eq.true');
+      }
+      if (badge && PRODUCT_BADGE_KEYS.includes(badge)) q = q.eq('badge', badge);
       if (category) {
         const { data: cat } = await supabase
           .from('categories')
@@ -45,7 +49,8 @@ router.get('/', async (req, res, next) => {
     let list = store.listActive();
     if (category) list = list.filter((p) => p.categories?.slug === category);
     if (featured === 'true') list = list.filter((p) => p.is_featured);
-    if (bestseller === 'true') list = list.filter((p) => p.is_bestseller);
+    if (bestseller === 'true') list = list.filter((p) => matchesBestsellerFilter(p));
+    if (badge && PRODUCT_BADGE_KEYS.includes(badge)) list = list.filter((p) => p.badge === badge);
     if (limit) list = list.slice(0, Number(limit));
     res.json(list);
   } catch (e) {

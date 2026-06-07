@@ -37,6 +37,7 @@ const makeProduct = ({
   imageIndex,
   is_bestseller = true,
   is_featured = false,
+  badge = null,
 }) => ({
   id,
   category_id,
@@ -67,6 +68,7 @@ const makeProduct = ({
   ],
   is_featured,
   is_bestseller,
+  badge: badge ?? (is_bestseller ? 'best_seller' : is_featured ? 'new_arrival' : null),
   is_active: true,
   sort_order,
   review_count: 18 + imageIndex * 3,

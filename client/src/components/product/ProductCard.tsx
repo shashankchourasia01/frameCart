@@ -5,6 +5,7 @@ import { formatPrice } from '../../lib/utils';
 import { cardHover } from '../../animations/variants';
 import { LazyImage } from '../shared/LazyImage';
 import { StarRating } from '../shared/StarRating';
+import { ProductBadge } from './ProductBadge';
 import { getProductImage } from '../../constants/images';
 
 interface ProductCardProps {
@@ -29,11 +30,7 @@ export function ProductCard({ product }: ProductCardProps) {
           />
         </div>
         <div className="p-3">
-          {product.is_bestseller && (
-            <span className="mb-2 inline-block rounded-full bg-brand-gold-light px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-brand-maroon">
-              Bestseller
-            </span>
-          )}
+          <ProductBadge product={product} className="mb-2 inline-block rounded-full normal-case" />
           <h3 className="font-heading text-xs font-semibold text-brand-charcoal line-clamp-2 sm:text-sm">
             {product.name}
           </h3>

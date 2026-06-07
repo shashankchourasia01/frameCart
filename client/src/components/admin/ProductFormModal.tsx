@@ -14,6 +14,7 @@ import {
 import { useCategories } from '../../hooks/useCategories';
 import { useCreateProduct, useUpdateProduct } from '../../hooks/useAdminProducts';
 import type { Product } from '../../types';
+import { PRODUCT_BADGE_OPTIONS } from '../../constants/productBadges';
 import { CloseIcon } from '../icons';
 
 interface ProductFormModalProps {
@@ -307,22 +308,23 @@ export function ProductFormModal({ open, product, onClose }: ProductFormModalPro
                       />
                       <span>Available on store</span>
                     </label>
-                    <label className="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm">
-                      <input
-                        type="checkbox"
-                        checked={form.is_featured}
-                        onChange={(e) => set('is_featured', e.target.checked)}
-                      />
-                      Featured
-                    </label>
-                    <label className="flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm">
-                      <input
-                        type="checkbox"
-                        checked={form.is_bestseller}
-                        onChange={(e) => set('is_bestseller', e.target.checked)}
-                      />
-                      Bestseller badge
-                    </label>
+                    <div className="min-w-[220px] flex-1">
+                      <FieldLabel hint="Shown on product cards across the website">
+                        Store badge
+                      </FieldLabel>
+                      <select
+                        className={inputClass('mt-1')}
+                        value={form.badge}
+                        onChange={(e) => set('badge', e.target.value as ProductFormState['badge'])}
+                      >
+                        <option value="">No badge</option>
+                        {PRODUCT_BADGE_OPTIONS.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </section>
 

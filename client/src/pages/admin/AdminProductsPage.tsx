@@ -17,6 +17,7 @@ import {
   type ProductWithAdminMeta,
 } from '../../lib/adminProductDisplay';
 import { formatPrice, cn } from '../../lib/utils';
+import { PRODUCT_BADGES, resolveProductBadge } from '../../constants/productBadges';
 import type { Product } from '../../types';
 
 type StatusFilter = 'all' | 'active' | 'inactive';
@@ -430,18 +431,22 @@ function ProductNameCell({ product: p }: { product: Product }) {
         <p className="font-medium text-brand-charcoal">{p.name}</p>
         <p className="truncate font-mono text-[11px] text-brand-charcoal-light">{p.slug}</p>
         <div className="mt-1 flex flex-wrap gap-1">
-          {p.is_bestseller && <Tag color="amber">Bestseller</Tag>}
-          {p.is_featured && <Tag color="blue">Featured</Tag>}
+          <ProductBadgeTag product={p} />
         </div>
       </div>
     </div>
   );
 }
 
-function Tag({ children, color }: { children: React.ReactNode; color: 'amber' | 'blue' }) {
-  const cls =
-    color === 'amber' ? 'bg-amber-100 text-amber-800' : 'bg-blue-100 text-blue-800';
-  return <span className={cn('rounded px-1.5 py-0.5 text-[10px] font-medium', cls)}>{children}</span>;
+function ProductBadgeTag({ product }: { product: Product }) {
+  const badge = resolveProductBadge(product);
+  if (!badge) return null;
+
+  return (
+    <span className="rounded bg-brand-maroon/10 px-1.5 py-0.5 text-[10px] font-medium text-brand-maroon">
+      {PRODUCT_BADGES[badge].label}
+    </span>
+  );
 }
 
 function AdminProductCard({
@@ -470,6 +475,9 @@ function AdminProductCard({
         <div className="min-w-0 flex-1">
           <p className="font-semibold text-brand-charcoal">{p.name}</p>
           <p className="text-xs text-brand-charcoal-light">{p.categories?.name}</p>
+          <div className="mt-1">
+            <ProductBadgeTag product={p} />
+          </div>
           <p className="mt-1 font-bold tabular-nums">{formatPrice(Number(p.base_price))}</p>
         </div>
       </div>

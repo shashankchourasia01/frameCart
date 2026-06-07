@@ -33,6 +33,11 @@ CREATE TABLE products (
   images                  TEXT[] DEFAULT ARRAY[]::TEXT[],
   is_featured             BOOLEAN DEFAULT false,
   is_bestseller           BOOLEAN DEFAULT false,
+  badge                   TEXT CHECK (badge IS NULL OR badge IN (
+                            'best_seller', 'top_seller_month', 'month_special', 'new_arrival',
+                            'trending', 'editors_pick', 'limited_edition', 'on_sale',
+                            'customer_favorite', 'gift_favorite', 'hot_deal', 'premium_pick'
+                          )),
   is_active               BOOLEAN DEFAULT true,
   sort_order              INT DEFAULT 0,
   review_count            INT DEFAULT 0,
